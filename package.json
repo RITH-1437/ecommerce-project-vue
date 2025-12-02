@@ -14,7 +14,10 @@
     "format": "prettier --write --experimental-cli src/"
   },
   "dependencies": {
+    "chart.js": "^4.5.1",
+    "google-auth-library": "^10.5.0",
     "pinia": "^3.0.4",
+    "sweetalert2": "^11.26.3",
     "vue": "^3.5.25",
     "vue-router": "^4.6.3"
   },

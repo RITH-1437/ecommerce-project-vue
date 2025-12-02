@@ -1,0 +1,10 @@
+<svg width="512" height="512" viewBox="0 0 512 512" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="facebookGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#5B7BD5;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#4A65C7;stop-opacity:1" />
+    </linearGradient>
+  </defs>
+  <rect width="512" height="512" rx="120" ry="120" fill="url(#facebookGrad)"/>
+  <path d="M355.6 330.4h-58.5V256h58.5l8.8-68.2h-67.3v-26.8c0-18.4 5.1-31 31.6-31h36.1V70.6c-6.3-.8-27.9-2.7-53.1-2.7-52.5 0-88.4 32.1-88.4 91v50.8h-59.4V256h59.4v74.4h71.1V256z" fill="white"/>
+</svg>
