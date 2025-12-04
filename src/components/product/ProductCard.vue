@@ -82,6 +82,8 @@ export default {
   methods: {
     addToCart() {
       this.cartStore.addItem(this.product)
+      // Save to localStorage for detail page access
+      localStorage.setItem(`product_${this.product.id}`, JSON.stringify(this.product))
       // Just add to cart without redirecting
     },
   },

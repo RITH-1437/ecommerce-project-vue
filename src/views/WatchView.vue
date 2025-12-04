@@ -20,7 +20,7 @@ export default {
       pageConfig: {
         title: 'Apple Watch',
         subtitle: 'A healthy leap ahead.',
-        emoji: '⌚',
+        emoji: '<i class="fas fa-clock"></i>',
       },
       productSections: [
         {

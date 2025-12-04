@@ -5,7 +5,7 @@
       <div class="sidebar">
         <div class="sidebar-header">
           <div class="logo">
-            <span class="logo-icon">🍎</span>
+            <span class="logo-icon"><i class="fab fa-apple"></i></span>
             <h2 class="sidebar-title">Apple Store Admin</h2>
           </div>
           <div class="sidebar-status">
@@ -15,31 +15,35 @@
         </div>
         <nav class="sidebar-nav">
           <router-link to="/admin/overview" class="nav-item">
-            <span class="nav-icon">📊</span>
+            <span class="nav-icon"><i class="fas fa-chart-line"></i></span>
             <span class="nav-text">Overview</span>
           </router-link>
           <router-link to="/admin/orders" class="nav-item">
-            <span class="nav-icon">📋</span>
+            <span class="nav-icon"><i class="fas fa-clipboard-list"></i></span>
             <span class="nav-text">Orders</span>
           </router-link>
           <router-link to="/admin/products" class="nav-item">
-            <span class="nav-icon">📱</span>
+            <span class="nav-icon"><i class="fas fa-box"></i></span>
             <span class="nav-text">Products</span>
           </router-link>
           <router-link to="/admin/users" class="nav-item" active-class="active">
-            <span class="nav-icon">👥</span>
+            <span class="nav-icon"><i class="fas fa-users"></i></span>
             <span class="nav-text">Users</span>
           </router-link>
           <router-link to="/admin/discounts" class="nav-item">
-            <span class="nav-icon">💰</span>
+            <span class="nav-icon"><i class="fas fa-tags"></i></span>
             <span class="nav-text">Discounts</span>
           </router-link>
           <router-link to="/admin/categories" class="nav-item">
-            <span class="nav-icon">📂</span>
+            <span class="nav-icon"><i class="fas fa-folder"></i></span>
             <span class="nav-text">Categories</span>
           </router-link>
+          <router-link to="/admin/reviews" class="nav-item">
+            <span class="nav-icon"><i class="fas fa-star"></i></span>
+            <span class="nav-text">Reviews</span>
+          </router-link>
           <router-link to="/admin/settings" class="nav-item">
-            <span class="nav-icon">⚙️</span>
+            <span class="nav-icon"><i class="fas fa-cog"></i></span>
             <span class="nav-text">Settings</span>
           </router-link>
         </nav>
@@ -54,7 +58,7 @@
           </div>
           <div class="header-right">
             <router-link to="/" class="back-to-store-btn">
-              <span class="icon">🏪</span>
+              <span class="icon"><i class="fas fa-store"></i></span>
               <span>Back to Store</span>
             </router-link>
           </div>
@@ -313,6 +317,14 @@ const updateUserRole = (userId, newRole) => {
     cancelButtonColor: '#6c757d',
     confirmButtonText: '✓ Update Role',
     cancelButtonText: 'Cancel',
+    customClass: {
+      container: 'swal-high-z-index',
+      popup: 'swal-high-z-index-popup',
+    },
+    backdrop: `
+      rgba(0,0,0,0.6)
+    `,
+    heightAuto: false,
   }).then((result) => {
     if (result.isConfirmed) {
       users.value[userIndex].role = newRole
@@ -323,6 +335,11 @@ const updateUserRole = (userId, newRole) => {
         text: `User role has been changed from ${oldRole} to ${newRole}`,
         timer: 2000,
         showConfirmButton: false,
+        customClass: {
+          container: 'swal-high-z-index',
+          popup: 'swal-high-z-index-popup',
+        },
+        heightAuto: false,
       })
       // TODO: Make API call to update backend
     }
@@ -504,5 +521,18 @@ const toggleUserStatus = (userId, isActive) => {
   .role-filter {
     flex: 1;
   }
+}
+
+/* SweetAlert2 high z-index fix */
+:deep(.swal-high-z-index) {
+  z-index: 99999 !important;
+}
+
+:deep(.swal-high-z-index-popup) {
+  z-index: 99999 !important;
+}
+
+:deep(.swal2-container) {
+  z-index: 99999 !important;
 }
 </style>

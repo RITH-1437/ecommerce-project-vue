@@ -268,6 +268,7 @@
 <script>
 import { useAuthStore } from '@/stores/auth.js'
 import { useGoogleAuth } from '@/composables/useGoogleAuth.js'
+import Swal from 'sweetalert2'
 
 export default {
   name: 'AuthView',
@@ -317,11 +318,33 @@ export default {
     // Redirect to appropriate page after successful login
     'authStore.isLoggedIn'(isLoggedIn) {
       if (isLoggedIn) {
-        this.showSuccessMessage('Successfully signed in!')
-        setTimeout(() => {
-          const redirectPath = this.authStore.isAdmin ? '/admin/overview' : '/'
+        const redirectPath = this.authStore.isAdmin ? '/admin/overview' : '/'
+        Swal.fire({
+          icon: 'success',
+          title: 'Welcome Back!',
+          html: `
+            <div style="text-align: center;">
+              <p style="font-size: 16px; color: #333; margin: 10px 0;">
+                Successfully signed in as <strong>${this.authStore.user?.name || 'User'}</strong>
+              </p>
+              <p style="font-size: 14px; color: #666;">
+                Role: <span style="color: #0071e3; font-weight: 600;">${this.authStore.user?.role || 'Customer'}</span>
+              </p>
+            </div>
+          `,
+          confirmButtonText: 'Continue',
+          confirmButtonColor: '#0071e3',
+          timer: 2500,
+          timerProgressBar: true,
+          showClass: {
+            popup: 'animate__animated animate__fadeInDown',
+          },
+          hideClass: {
+            popup: 'animate__animated animate__fadeOutUp',
+          },
+        }).then(() => {
           this.$router.push(redirectPath)
-        }, 1500)
+        })
       }
     },
   },
@@ -400,6 +423,35 @@ export default {
 
         // Register through store
         this.authStore.login(userData)
+
+        // Show success alert after registration
+        await Swal.fire({
+          icon: 'success',
+          title: 'Account Created!',
+          html: `
+            <div style="text-align: center;">
+              <p style="font-size: 16px; color: #333; margin: 10px 0;">
+                Welcome to Apple Store, <strong>${userData.name}</strong>! 🎉
+              </p>
+              <p style="font-size: 14px; color: #666;">
+                Your account has been successfully created.
+              </p>
+              <p style="font-size: 14px; color: #666; margin-top: 8px;">
+                Role: <span style="color: #0071e3; font-weight: 600;">${userData.role}</span>
+              </p>
+            </div>
+          `,
+          confirmButtonText: 'Get Started',
+          confirmButtonColor: '#0071e3',
+          timer: 3000,
+          timerProgressBar: true,
+          showClass: {
+            popup: 'animate__animated animate__fadeInDown',
+          },
+          hideClass: {
+            popup: 'animate__animated animate__fadeOutUp',
+          },
+        })
       } catch (error) {
         this.authStore.setError(error.message || 'Registration failed. Please try again.')
       } finally {

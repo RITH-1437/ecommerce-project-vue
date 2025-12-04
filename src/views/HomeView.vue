@@ -29,17 +29,17 @@
           <div class="product-stack">
             <div class="product-float iphone" :class="{ animated: isVisible }">
               <div class="device-frame">
-                <div class="device-screen">📱</div>
+                <div class="device-screen"><i class="fas fa-mobile-alt"></i></div>
               </div>
             </div>
             <div class="product-float ipad" :class="{ animated: isVisible }">
               <div class="device-frame">
-                <div class="device-screen">💻</div>
+                <div class="device-screen"><i class="fas fa-laptop"></i></div>
               </div>
             </div>
             <div class="product-float watch" :class="{ animated: isVisible }">
               <div class="device-frame">
-                <div class="device-screen">⌚</div>
+                <div class="device-screen"><i class="fas fa-clock"></i></div>
               </div>
             </div>
           </div>
@@ -99,9 +99,9 @@
                         <button @click="showProductDetails(product)" class="product-btn-learn">
                           Learn More
                         </button>
-                        <router-link :to="product.route" class="product-btn-popular">
-                          View Details
-                        </router-link>
+                        <button @click="addToCartAndNavigate(product)" class="product-btn-cart">
+                          🛒 Add to Cart
+                        </button>
                       </div>
                     </div>
                   </div>
@@ -716,6 +716,22 @@ export default {
     closeModal() {
       this.showModal = false
       this.selectedProduct = null
+    },
+    addToCartAndNavigate(product) {
+      // Import cart store
+      const { useCartStore } = require('@/stores/counter.js')
+      const cartStore = useCartStore()
+
+      // Add to cart
+      cartStore.addItem(product)
+
+      // Show success notification
+      alert(`${product.name} added to cart!`)
+
+      // Navigate to product page
+      if (product.route) {
+        this.$router.push(product.route)
+      }
     },
   },
 }
@@ -1803,6 +1819,27 @@ export default {
   color: white;
   transform: translateY(-2px);
   box-shadow: 0 8px 25px rgba(0, 122, 255, 0.3);
+}
+
+.product-btn-cart {
+  background: linear-gradient(135deg, #34c759, #30d158);
+  color: white;
+  padding: 8px 16px;
+  border: none;
+  border-radius: 20px;
+  font-weight: 600;
+  font-size: 14px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  text-decoration: none;
+  display: inline-block;
+  text-align: center;
+}
+
+.product-btn-cart:hover {
+  background: linear-gradient(135deg, #30d158, #28cd4f);
+  transform: translateY(-2px);
+  box-shadow: 0 8px 25px rgba(52, 199, 89, 0.4);
 }
 
 /* Modal Styles */

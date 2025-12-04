@@ -98,7 +98,7 @@ export default {
 .app-footer {
   background: #1d1d1f;
   color: white;
-  margin-top: 80px;
+  margin-top: 60px;
 }
 
 .container {
@@ -109,15 +109,15 @@ export default {
 
 .footer-content {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-  gap: 40px;
-  padding: 50px 0 30px;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 30px;
+  padding: 35px 0 20px;
 }
 
 .footer-section h3 {
-  font-size: 20px;
+  font-size: 16px;
   font-weight: 600;
-  margin-bottom: 20px;
+  margin-bottom: 12px;
   color: white;
 }
 
@@ -127,14 +127,14 @@ export default {
 }
 
 .footer-section li {
-  margin-bottom: 10px;
+  margin-bottom: 6px;
 }
 
 .footer-section a {
   color: #a1a1a6;
   text-decoration: none;
   transition: color 0.3s ease;
-  font-size: 15px;
+  font-size: 13px;
 }
 
 .footer-section a:hover {
@@ -143,8 +143,8 @@ export default {
 
 .footer-section p {
   color: #a1a1a6;
-  margin: 8px 0;
-  font-size: 15px;
+  margin: 6px 0;
+  font-size: 13px;
 }
 
 .footer-section p a {
@@ -158,31 +158,32 @@ export default {
 
 .footer-bottom {
   border-top: 1px solid #424245;
-  padding: 25px 0;
+  padding: 18px 0;
   text-align: center;
 }
 
 .footer-bottom p {
   color: #a1a1a6;
   margin: 0;
-  font-size: 14px;
+  font-size: 12px;
 }
 
 /* Social Links Styling */
 .social-links {
   display: flex;
   flex-direction: column;
-  gap: 12px;
+  gap: 8px;
 }
 
 .social-link {
   display: flex;
   align-items: center;
-  gap: 12px;
+  gap: 10px;
   color: #a1a1a6;
   text-decoration: none;
   transition: all 0.3s ease;
-  padding: 8px 0;
+  padding: 6px 0;
+  font-size: 13px;
 }
 
 .social-link:hover {
@@ -191,14 +192,14 @@ export default {
 }
 
 .social-icon {
-  font-size: 18px;
-  width: 28px;
-  height: 28px;
+  font-size: 16px;
+  width: 24px;
+  height: 24px;
   text-align: center;
   display: flex;
   align-items: center;
   justify-content: center;
-  border-radius: 6px;
+  border-radius: 5px;
   font-weight: bold;
   transition: all 0.3s ease;
 }
@@ -259,16 +260,17 @@ export default {
 .contact-info {
   display: flex;
   flex-direction: column;
-  gap: 12px;
+  gap: 8px;
 }
 
 .contact-item {
   display: flex;
   align-items: center;
-  gap: 12px;
+  gap: 10px;
   color: #a1a1a6;
   margin: 0;
-  padding: 8px 0;
+  padding: 6px 0;
+  font-size: 13px;
 }
 
 .contact-item a {
@@ -283,8 +285,8 @@ export default {
 }
 
 .contact-icon {
-  font-size: 18px;
-  width: 24px;
+  font-size: 16px;
+  width: 20px;
   text-align: center;
 }
 

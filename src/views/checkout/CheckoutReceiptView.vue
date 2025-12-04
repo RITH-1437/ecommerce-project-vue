@@ -1,31 +1,5 @@
 <template>
   <div class="receipt-page">
-    <!-- Header -->
-    <header class="receipt-header">
-      <div class="container">
-        <router-link to="/" class="back-link">← Back to Store</router-link>
-        <h1 class="receipt-title">Order Confirmation</h1>
-
-        <!-- Progress Bar -->
-        <div class="progress-bar">
-          <div class="progress-step completed">
-            <div class="step-circle">✓</div>
-            <span>Cart</span>
-          </div>
-          <div class="progress-line completed"></div>
-          <div class="progress-step completed">
-            <div class="step-circle">✓</div>
-            <span>Payment</span>
-          </div>
-          <div class="progress-line completed"></div>
-          <div class="progress-step completed">
-            <div class="step-circle">✓</div>
-            <span>Receipt</span>
-          </div>
-        </div>
-      </div>
-    </header>
-
     <!-- Receipt Content -->
     <main class="receipt-main">
       <div class="container">
@@ -402,90 +376,10 @@ export default {
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
 }
 
-.receipt-header {
-  background: white;
-  border-bottom: 1px solid #d2d2d7;
-  padding: 20px 0;
-}
-
 .container {
   max-width: 900px;
   margin: 0 auto;
   padding: 0 20px;
-}
-
-.receipt-header .container {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  flex-wrap: wrap;
-  gap: 20px;
-}
-
-.back-link {
-  color: #0066cc;
-  text-decoration: none;
-  font-weight: 500;
-  transition: color 0.3s ease;
-}
-
-.back-link:hover {
-  color: #0077ed;
-}
-
-.receipt-title {
-  font-size: 2rem;
-  font-weight: 700;
-  color: #1d1d1f;
-  margin: 0;
-}
-
-/* Progress Bar */
-.progress-bar {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  background: white;
-  border-radius: 15px;
-  padding: 1.5rem;
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
-  margin-top: 1rem;
-  width: 100%;
-}
-
-.progress-step {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  color: #28a745;
-  transition: all 0.3s ease;
-}
-
-.progress-step.completed {
-  color: #28a745;
-}
-
-.step-circle {
-  width: 40px;
-  height: 40px;
-  border-radius: 50%;
-  background: #28a745;
-  color: white;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-weight: bold;
-  margin-bottom: 0.5rem;
-  transition: all 0.3s ease;
-}
-
-.progress-line {
-  flex: 1;
-  height: 3px;
-  background: #28a745;
-  margin: 0 2rem;
-  border-radius: 2px;
-  transition: all 0.3s ease;
 }
 
 .receipt-main {

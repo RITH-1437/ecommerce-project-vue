@@ -45,14 +45,17 @@
                 <div class="item-details">
                   <h3 class="item-name">{{ item.name }}</h3>
                   <p class="item-description" v-if="item.description">{{ item.description }}</p>
-                  <div class="item-colors" v-if="item.colors">
+                  <div class="item-colors" v-if="item.colors && item.colors.length > 0">
                     <span>Color:</span>
                     <div class="color-options">
                       <div
-                        v-for="color in item.colors.slice(0, 1)"
+                        v-for="color in item.colors"
                         :key="color"
                         class="color-dot"
+                        :class="{ selected: item.selectedColor === color }"
                         :style="{ backgroundColor: color }"
+                        @click="selectColor(item.id, color)"
+                        :title="getColorName(color)"
                       ></div>
                     </div>
                   </div>
@@ -255,30 +258,85 @@ export default {
       }
     },
     removeItem(productId) {
-      this.cartStore.removeItem(productId)
+      const item = this.cartStore.items.find((i) => i.id === productId)
+      if (!item) return
+
+      Swal.fire({
+        title: 'Remove Item?',
+        html: `
+          <div style="text-align: left; padding: 10px;">
+            <p style="margin-bottom: 15px;">Are you sure you want to remove this item from your cart?</p>
+            <div style="background: #f8f9fa; padding: 15px; border-radius: 8px; display: flex; align-items: center; gap: 12px;">
+              <div style="font-size: 2rem;">${item.image || '📱'}</div>
+              <div>
+                <h4 style="margin: 0; font-size: 1rem; color: #212529;">${item.name}</h4>
+                <p style="margin: 5px 0 0 0; color: #6c757d; font-size: 0.9rem;">${item.price} × ${item.quantity}</p>
+              </div>
+            </div>
+          </div>
+        `,
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#dc3545',
+        cancelButtonColor: '#6c757d',
+        confirmButtonText: '🗑️ Remove',
+        cancelButtonText: 'Keep it',
+      }).then((result) => {
+        if (result.isConfirmed) {
+          this.cartStore.removeItem(productId)
+          Swal.fire({
+            icon: 'success',
+            title: 'Removed!',
+            text: 'Item has been removed from your cart.',
+            timer: 1500,
+            showConfirmButton: false,
+          })
+        }
+      })
     },
     applyCoupon() {
       const code = this.couponCode.trim()
-      if (!code) return
+      if (!code) {
+        Swal.fire({
+          icon: 'warning',
+          title: 'Empty Code',
+          text: 'Please enter a coupon code.',
+          confirmButtonColor: '#0066cc',
+          confirmButtonText: 'OK',
+        })
+        return
+      }
 
       const coupon = this.availableCoupons[code]
       if (coupon) {
         this.appliedCoupon = coupon
         this.couponCode = ''
+        Swal.fire({
+          icon: 'success',
+          title: 'Coupon Applied!',
+          html: `
+            <div style="text-align: center;">
+              <p style="font-size: 1.1rem; margin: 10px 0;">🎉 <strong>${coupon.code}</strong></p>
+              <p style="color: #28a745; font-weight: 600; font-size: 1.2rem;">${coupon.discount}% OFF</p>
+              <p style="color: #86868b; font-size: 0.9rem;">Discount applied to your order</p>
+            </div>
+          `,
+          confirmButtonColor: '#28a745',
+          confirmButtonText: 'Great!',
+          timer: 2000,
+        })
       } else {
         Swal.fire({
           icon: 'error',
-          title: 'Invalid Coupon',
+          title: 'Invalid Coupon Code',
           html: `
-            <p>Invalid coupon code!</p>
-            <p><strong>Try these codes:</strong></p>
-            <ul style="list-style: none; padding: 0;">
-              <li>🎁 Miss-me</li>
-              <li>💝 Love-you</li>
-              <li>💋 Kiss-one</li>
-            </ul>
+            <div style="text-align: center;">
+              <p style="color: #ff4d4f; font-size: 1.1rem; margin: 15px 0;">❌ Code "<strong>${code}</strong>" is not valid</p>
+              <p style="color: #86868b; font-size: 0.95rem;">Please check your code and try again.</p>
+            </div>
           `,
-          confirmButtonText: 'OK',
+          confirmButtonColor: '#ff4d4f',
+          confirmButtonText: 'Try Again',
         })
         this.couponCode = ''
       }
@@ -323,6 +381,58 @@ export default {
     removeCoupon() {
       this.appliedCoupon = null
       this.couponCode = ''
+    },
+    selectColor(productId, color) {
+      const item = this.cartStore.items.find((i) => i.id === productId)
+      if (item) {
+        item.selectedColor = color
+        Swal.fire({
+          icon: 'success',
+          title: 'Color Updated!',
+          text: `Color changed to ${this.getColorName(color)}`,
+          timer: 1500,
+          showConfirmButton: false,
+        })
+      }
+    },
+    getColorName(color) {
+      const colorNames = {
+        '#000000': 'Black',
+        '#1d1d1f': 'Space Black',
+        '#4a4a4a': 'Space Gray',
+        '#8e8e93': 'Gray',
+        '#c0c0c0': 'Silver',
+        '#ffffff': 'White',
+        '#f5f5f7': 'Starlight',
+        '#faf0e6': 'Light',
+        '#e8d7c3': 'Gold',
+        '#fad7a0': 'Desert Gold',
+        '#b8a88f': 'Natural Titanium',
+        '#d4c5b9': 'Sand',
+        '#e1f5ff': 'Sky Blue',
+        '#007aff': 'Blue',
+        '#003d7a': 'Pacific Blue',
+        '#1c3d5a': 'Deep Blue',
+        '#7d98a1': 'Blue Titanium',
+        '#006d5b': 'Alpine Green',
+        '#004d3c': 'Midnight Green',
+        '#405e54': 'Green',
+        '#c7a27c': 'Beige',
+        '#f9e5c9': 'Cream',
+        '#ffc0cb': 'Pink',
+        '#ffb3c1': 'Rose',
+        '#e8b4b8': 'Rose Gold',
+        '#d4af37': 'Gold',
+        '#ff9500': 'Orange',
+        '#ff3b30': 'Red',
+        '#c41e3a': 'Deep Red',
+        '#8b0000': 'Dark Red',
+        '#800020': 'Burgundy',
+        '#6e3667': 'Purple',
+        '#5e17eb': 'Deep Purple',
+        '#4a0e4e': 'Violet',
+      }
+      return colorNames[color.toLowerCase()] || 'Custom'
     },
     proceedToPayment() {
       // Store coupon data for payment page
@@ -566,10 +676,37 @@ export default {
 }
 
 .color-dot {
-  width: 16px;
-  height: 16px;
+  width: 24px;
+  height: 24px;
   border-radius: 50%;
   border: 2px solid #e5e5e7;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  position: relative;
+}
+
+.color-dot:hover {
+  transform: scale(1.15);
+  border-color: #007aff;
+  box-shadow: 0 2px 8px rgba(0, 122, 255, 0.3);
+}
+
+.color-dot.selected {
+  border: 3px solid #007aff;
+  box-shadow: 0 0 0 2px rgba(0, 122, 255, 0.2);
+  transform: scale(1.1);
+}
+
+.color-dot.selected::after {
+  content: '✓';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  color: white;
+  font-size: 12px;
+  font-weight: bold;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.5);
 }
 
 .item-quantity {

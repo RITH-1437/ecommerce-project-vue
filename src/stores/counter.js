@@ -27,6 +27,7 @@ export const useCartStore = defineStore('cart', () => {
       items.value.push({
         ...product,
         quantity: 1,
+        selectedColor: product.colors && product.colors.length > 0 ? product.colors[0] : null,
         addedAt: new Date().toISOString(),
       })
     }

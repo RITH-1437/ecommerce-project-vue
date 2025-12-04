@@ -20,7 +20,7 @@ export default {
       pageConfig: {
         title: 'iPhone',
         subtitle: 'Designed to be loved.',
-        emoji: '📱',
+        emoji: '<i class="fas fa-mobile-alt"></i>',
       },
       productSections: [
         {

@@ -13,9 +13,13 @@ import AdminCategoriesView from '../views/admin/AdminCategoriesView.vue'
 import AdminOrdersView from '../views/admin/AdminOrdersView.vue'
 import AdminDiscountsView from '../views/admin/AdminDiscountsView.vue'
 import AdminSettingsView from '../views/admin/AdminSettingsView.vue'
+import AdminReviewsView from '../views/admin/AdminReviewsView.vue'
+import AdminContactsView from '../views/admin/AdminContactsView.vue'
 import CheckoutCartView from '../views/checkout/CheckoutCartView.vue'
 import CheckoutPaymentView from '../views/checkout/CheckoutPaymentView.vue'
 import CheckoutReceiptView from '../views/checkout/CheckoutReceiptView.vue'
+import CustomerOrdersView from '../views/CustomerOrdersView.vue'
+import ProductDetailView from '../views/ProductDetailView.vue'
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -51,9 +55,20 @@ const router = createRouter({
       component: AirPodsView,
     },
     {
+      path: '/product/:type/:id',
+      name: 'ProductDetail',
+      component: ProductDetailView,
+    },
+    {
       path: '/auth',
       name: 'Auth',
       component: AuthView,
+    },
+    // Customer routes
+    {
+      path: '/my-orders',
+      name: 'CustomerOrders',
+      component: CustomerOrdersView,
     },
     // Checkout routes
     {
@@ -106,6 +121,16 @@ const router = createRouter({
       path: '/admin/settings',
       name: 'AdminSettings',
       component: AdminSettingsView,
+    },
+    {
+      path: '/admin/reviews',
+      name: 'AdminReviews',
+      component: AdminReviewsView,
+    },
+    {
+      path: '/admin/contacts',
+      name: 'AdminContacts',
+      component: AdminContactsView,
     },
     // Legacy dashboard route redirect
     {

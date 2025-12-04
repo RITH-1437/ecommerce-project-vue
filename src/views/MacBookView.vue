@@ -20,7 +20,7 @@ export default {
       pageConfig: {
         title: 'MacBook',
         subtitle: 'Supercharged for pros.',
-        emoji: '💻',
+        emoji: '<i class="fas fa-laptop"></i>',
       },
       productSections: [
         {

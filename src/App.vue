@@ -2,16 +2,19 @@
   <div id="app">
     <router-view />
     <LocationPopup />
+    <ContactPopup />
   </div>
 </template>
 
 <script>
 import LocationPopup from '@/components/global/LocationPopup.vue'
+import ContactPopup from '@/components/global/ContactPopup.vue'
 
 export default {
   name: 'App',
   components: {
     LocationPopup,
+    ContactPopup,
   },
 }
 </script>

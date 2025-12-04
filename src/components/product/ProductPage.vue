@@ -19,9 +19,8 @@
                   v-for="(item, index) in 3"
                   :key="index"
                   :class="`product product-${index + 1}`"
-                >
-                  {{ pageConfig.emoji }}
-                </div>
+                  v-html="pageConfig.emoji"
+                ></div>
               </div>
             </div>
           </div>
@@ -201,7 +200,16 @@ export default {
     },
 
     viewProduct(product) {
-      console.log('View product:', product)
+      // Save product to localStorage
+      localStorage.setItem(`product_${product.id}`, JSON.stringify(product))
+      // Navigate to product detail page
+      this.$router.push({
+        name: 'ProductDetail',
+        params: {
+          type: this.productType.toLowerCase(),
+          id: product.id,
+        },
+      })
     },
 
     buyNow(product) {

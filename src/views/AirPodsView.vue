@@ -20,7 +20,7 @@ export default {
       pageConfig: {
         title: 'AirPods',
         subtitle: "Magic like you've never heard.",
-        emoji: '🎧',
+        emoji: '<i class="fas fa-headphones"></i>',
       },
       productSections: [
         {

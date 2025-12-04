@@ -20,7 +20,7 @@ export default {
       pageConfig: {
         title: 'iPad',
         subtitle: 'Lovable. Drawable. Magical.',
-        emoji: '💻',
+        emoji: '<i class="fas fa-tablet-alt"></i>',
       },
       productSections: [
         {

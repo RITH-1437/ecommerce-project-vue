@@ -5,7 +5,7 @@
       <div class="sidebar">
         <div class="sidebar-header">
           <div class="logo">
-            <span class="logo-icon">🍎</span>
+            <span class="logo-icon"><i class="fab fa-apple"></i></span>
             <h2 class="sidebar-title">Apple Store Admin</h2>
           </div>
           <div class="sidebar-status">
@@ -15,31 +15,35 @@
         </div>
         <nav class="sidebar-nav">
           <router-link to="/admin/overview" class="nav-item">
-            <span class="nav-icon">📊</span>
+            <span class="nav-icon"><i class="fas fa-chart-line"></i></span>
             <span class="nav-text">Overview</span>
           </router-link>
           <router-link to="/admin/orders" class="nav-item">
-            <span class="nav-icon">📋</span>
+            <span class="nav-icon"><i class="fas fa-clipboard-list"></i></span>
             <span class="nav-text">Orders</span>
           </router-link>
           <router-link to="/admin/products" class="nav-item">
-            <span class="nav-icon">📱</span>
+            <span class="nav-icon"><i class="fas fa-box"></i></span>
             <span class="nav-text">Products</span>
           </router-link>
           <router-link to="/admin/users" class="nav-item">
-            <span class="nav-icon">👥</span>
+            <span class="nav-icon"><i class="fas fa-users"></i></span>
             <span class="nav-text">Users</span>
           </router-link>
           <router-link to="/admin/discounts" class="nav-item">
-            <span class="nav-icon">💰</span>
+            <span class="nav-icon"><i class="fas fa-tags"></i></span>
             <span class="nav-text">Discounts</span>
           </router-link>
           <router-link to="/admin/categories" class="nav-item">
-            <span class="nav-icon">📂</span>
+            <span class="nav-icon"><i class="fas fa-folder"></i></span>
             <span class="nav-text">Categories</span>
           </router-link>
+          <router-link to="/admin/reviews" class="nav-item">
+            <span class="nav-icon"><i class="fas fa-star"></i></span>
+            <span class="nav-text">Reviews</span>
+          </router-link>
           <router-link to="/admin/settings" class="nav-item" active-class="active">
-            <span class="nav-icon">⚙️</span>
+            <span class="nav-icon"><i class="fas fa-cog"></i></span>
             <span class="nav-text">Settings</span>
           </router-link>
         </nav>
@@ -55,7 +59,7 @@
           </div>
           <div class="header-right">
             <router-link to="/" class="back-to-store-btn">
-              <span class="icon">🏪</span>
+              <span class="icon"><i class="fas fa-store"></i></span>
               <span>Back to Store</span>
             </router-link>
           </div>
@@ -65,7 +69,7 @@
         <div class="settings-container">
           <!-- General Information -->
           <div class="settings-card">
-            <div class="card-icon">🏪</div>
+            <div class="card-icon"><i class="fas fa-store"></i></div>
             <h2 class="card-title">Store Information</h2>
             <div class="form-group">
               <label class="form-label">Store Name</label>
@@ -87,7 +91,7 @@
 
           <!-- Currency & Tax -->
           <div class="settings-card">
-            <div class="card-icon">💰</div>
+            <div class="card-icon"><i class="fas fa-dollar-sign"></i></div>
             <h2 class="card-title">Currency & Tax Settings</h2>
             <div class="form-group">
               <label class="form-label">Default Currency</label>
@@ -123,7 +127,7 @@
 
           <!-- Notifications -->
           <div class="settings-card">
-            <div class="card-icon">🔔</div>
+            <div class="card-icon"><i class="fas fa-bell"></i></div>
             <h2 class="card-title">Notification Preferences</h2>
             <div class="toggle-group">
               <label class="toggle-label">
@@ -177,7 +181,7 @@
 
           <!-- Business Hours -->
           <div class="settings-card">
-            <div class="card-icon">🕒</div>
+            <div class="card-icon"><i class="fas fa-clock"></i></div>
             <h2 class="card-title">Business Hours</h2>
             <div class="form-group">
               <label class="form-label">Opening Time</label>
@@ -191,7 +195,9 @@
 
           <!-- Save Button -->
           <div class="save-section">
-            <button @click="saveSettings" class="save-btn">💾 Save All Changes</button>
+            <button @click="saveSettings" class="save-btn">
+              <i class="fas fa-save"></i> Save All Changes
+            </button>
           </div>
         </div>
       </div>
@@ -239,7 +245,7 @@ const saveSettings = () => {
     showCancelButton: true,
     confirmButtonColor: '#667eea',
     cancelButtonColor: '#6c757d',
-    confirmButtonText: '💾 Save Changes',
+    confirmButtonText: '<i class="fas fa-save"></i> Save Changes',
     cancelButtonText: 'Cancel',
     showLoaderOnConfirm: true,
     preConfirm: () => {

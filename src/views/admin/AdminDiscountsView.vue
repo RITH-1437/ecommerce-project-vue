@@ -5,7 +5,7 @@
       <div class="sidebar">
         <div class="sidebar-header">
           <div class="logo">
-            <span class="logo-icon">🍎</span>
+            <span class="logo-icon"><i class="fab fa-apple"></i></span>
             <h2 class="sidebar-title">Apple Store Admin</h2>
           </div>
           <div class="sidebar-status">
@@ -15,31 +15,35 @@
         </div>
         <nav class="sidebar-nav">
           <router-link to="/admin/overview" class="nav-item">
-            <span class="nav-icon">📊</span>
+            <span class="nav-icon"><i class="fas fa-chart-line"></i></span>
             <span class="nav-text">Overview</span>
           </router-link>
           <router-link to="/admin/orders" class="nav-item">
-            <span class="nav-icon">📋</span>
+            <span class="nav-icon"><i class="fas fa-clipboard-list"></i></span>
             <span class="nav-text">Orders</span>
           </router-link>
           <router-link to="/admin/products" class="nav-item">
-            <span class="nav-icon">📱</span>
+            <span class="nav-icon"><i class="fas fa-box"></i></span>
             <span class="nav-text">Products</span>
           </router-link>
           <router-link to="/admin/users" class="nav-item">
-            <span class="nav-icon">👥</span>
+            <span class="nav-icon"><i class="fas fa-users"></i></span>
             <span class="nav-text">Users</span>
           </router-link>
           <router-link to="/admin/discounts" class="nav-item" active-class="active">
-            <span class="nav-icon">💰</span>
+            <span class="nav-icon"><i class="fas fa-tags"></i></span>
             <span class="nav-text">Discounts</span>
           </router-link>
           <router-link to="/admin/categories" class="nav-item">
-            <span class="nav-icon">📂</span>
+            <span class="nav-icon"><i class="fas fa-folder"></i></span>
             <span class="nav-text">Categories</span>
           </router-link>
+          <router-link to="/admin/reviews" class="nav-item">
+            <span class="nav-icon"><i class="fas fa-star"></i></span>
+            <span class="nav-text">Reviews</span>
+          </router-link>
           <router-link to="/admin/settings" class="nav-item">
-            <span class="nav-icon">⚙️</span>
+            <span class="nav-icon"><i class="fas fa-cog"></i></span>
             <span class="nav-text">Settings</span>
           </router-link>
         </nav>
@@ -55,7 +59,7 @@
           <div class="header-right">
             <button @click="openAddModal" class="add-btn">+ New Discount</button>
             <router-link to="/" class="back-to-store-btn">
-              <span class="icon">🏪</span>
+              <span class="icon"><i class="fas fa-store"></i></span>
               <span>Back to Store</span>
             </router-link>
           </div>

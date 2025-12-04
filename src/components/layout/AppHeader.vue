@@ -104,6 +104,7 @@
 import { useCartStore } from '@/stores/counter.js'
 import { useAuthStore } from '@/stores/auth.js'
 import { useGoogleAuth } from '@/composables/useGoogleAuth.js'
+import Swal from 'sweetalert2'
 
 export default {
   name: 'AppHeader',
@@ -192,18 +193,73 @@ export default {
     },
     viewProfile() {
       this.isDropdownOpen = false
-      console.log('Navigate to profile')
-      // Add navigation logic here
+
+      // Show user profile information
+      const user = this.authStore.user
+      Swal.fire({
+        title: 'My Profile',
+        html: `
+          <div style="text-align: left; padding: 10px;">
+            <div style="display: flex; align-items: center; gap: 15px; margin-bottom: 20px;">
+              ${user?.picture ? `<img src="${user.picture}" style="width: 60px; height: 60px; border-radius: 50%; box-shadow: 0 2px 8px rgba(0,0,0,0.1);" alt="Profile" />` : `<div style="width: 60px; height: 60px; border-radius: 50%; background: linear-gradient(135deg, #667eea, #764ba2); display: flex; align-items: center; justify-content: center; color: white; font-size: 24px; font-weight: bold;">${this.userAvatar}</div>`}
+              <div>
+                <h3 style="margin: 0; color: #1d1d1f; font-size: 1.2rem;">${user?.name || 'User'}</h3>
+                <p style="margin: 5px 0; color: #86868b; font-size: 0.9rem;">${user?.email || 'No email'}</p>
+                ${user?.provider === 'google' ? '<p style="margin: 5px 0; color: #34c759; font-size: 0.85rem;"><span>🔗</span> Google Account</p>' : ''}
+              </div>
+            </div>
+            <div style="background: #f5f5f7; padding: 15px; border-radius: 8px;">
+              <p style="margin: 5px 0; color: #1d1d1f;"><strong>Role:</strong> ${user?.role || 'Customer'}</p>
+              <p style="margin: 5px 0; color: #1d1d1f;"><strong>Member since:</strong> ${user?.loginTime ? new Date(user.loginTime).toLocaleDateString() : 'N/A'}</p>
+            </div>
+          </div>
+        `,
+        icon: 'info',
+        confirmButtonColor: '#667eea',
+        confirmButtonText: 'Close',
+        width: 450,
+      })
     },
     viewOrders() {
       this.isDropdownOpen = false
-      console.log('Navigate to orders')
-      // Add navigation logic here
+
+      // Check if user is admin
+      if (this.userRole === 'admin') {
+        this.$router.push('/admin/orders')
+      } else {
+        // Route customers to their orders page
+        this.$router.push('/my-orders')
+      }
     },
     viewSettings() {
       this.isDropdownOpen = false
-      console.log('Navigate to settings')
-      // Add navigation logic here
+
+      // Check if user is admin
+      if (this.userRole === 'admin') {
+        this.$router.push('/admin/settings')
+      } else {
+        // For regular customers, show a settings dialog
+        Swal.fire({
+          title: '⚙️ Settings',
+          html: `
+            <div style="text-align: left; padding: 15px;">
+              <div style="margin-bottom: 20px;">
+                <h4 style="color: #1d1d1f; margin-bottom: 10px;">Account Settings</h4>
+                <p style="color: #86868b; font-size: 0.9rem; margin: 5px 0;">• Profile Information</p>
+                <p style="color: #86868b; font-size: 0.9rem; margin: 5px 0;">• Password & Security</p>
+                <p style="color: #86868b; font-size: 0.9rem; margin: 5px 0;">• Notification Preferences</p>
+                <p style="color: #86868b; font-size: 0.9rem; margin: 5px 0;">• Payment Methods</p>
+              </div>
+              <div style="background: #f5f5f7; padding: 12px; border-radius: 8px; text-align: center;">
+                <p style="color: #667eea; font-size: 0.9rem; margin: 0;">Full settings page coming soon!</p>
+              </div>
+            </div>
+          `,
+          confirmButtonColor: '#667eea',
+          confirmButtonText: 'Close',
+          width: 400,
+        })
+      }
     },
     goToDashboard() {
       this.isDropdownOpen = false
