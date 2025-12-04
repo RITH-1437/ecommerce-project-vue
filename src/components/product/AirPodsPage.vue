@@ -321,16 +321,26 @@ export default {
   position: absolute;
   width: 120px;
   height: 120px;
-  background: linear-gradient(135deg, #ffffff 0%, #f8f8f8 100%);
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
   border-radius: 20px;
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 40px;
-  color: #333;
-  box-shadow: 0 15px 40px rgba(0, 0, 0, 0.2);
+  font-size: 50px;
+  color: #adadad;
+  box-shadow:
+    0 15px 40px rgba(102, 126, 234, 0.4),
+    0 5px 15px rgba(0, 0, 0, 0.2),
+    inset 0 1px 2px rgba(255, 255, 255, 0.2);
   animation: float 5s ease-in-out infinite;
-  border: 2px solid rgba(255, 255, 255, 0.8);
+  border: 2px solid rgba(255, 255, 255, 0.3);
+  filter: drop-shadow(0 4px 8px rgba(0, 0, 0, 0.3));
+  text-shadow:
+    0 2px 4px rgba(0, 0, 0, 0.5),
+    0 0 20px rgba(255, 0, 0, 0.4);
+  font-family: 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji', sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 
 .airpods-1 {

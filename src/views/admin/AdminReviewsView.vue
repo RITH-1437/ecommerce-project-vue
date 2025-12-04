@@ -30,6 +30,10 @@
             <span class="nav-icon"><i class="fas fa-users"></i></span>
             <span class="nav-text">Users</span>
           </router-link>
+          <router-link to="/admin/contacts" class="nav-item">
+            <span class="nav-icon"><i class="fas fa-envelope"></i></span>
+            <span class="nav-text">Contacts</span>
+          </router-link>
           <router-link to="/admin/discounts" class="nav-item">
             <span class="nav-icon"><i class="fas fa-tags"></i></span>
             <span class="nav-text">Discounts</span>
@@ -61,20 +65,7 @@
             <p class="page-subtitle">Approve or reject customer reviews</p>
           </div>
           <div class="header-right">
-            <div class="stats-summary">
-              <div class="stat-item">
-                <span class="stat-number">{{ pendingReviews.length }}</span>
-                <span class="stat-label">Pending</span>
-              </div>
-              <div class="stat-item">
-                <span class="stat-number">{{ approvedReviews.length }}</span>
-                <span class="stat-label">Approved</span>
-              </div>
-              <div class="stat-item">
-                <span class="stat-number">{{ rejectedReviews.length }}</span>
-                <span class="stat-label">Rejected</span>
-              </div>
-            </div>
+            <div class="stats-summary"></div>
             <router-link to="/" class="back-to-store-btn">
               <span class="icon"><i class="fas fa-store"></i></span>
               <span>Back to Store</span>
@@ -394,221 +385,7 @@ export default {
 </script>
 
 <style scoped>
-/* Admin Page Structure */
-.admin-page {
-  min-height: 100vh;
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-}
-
-.dashboard-container {
-  display: flex;
-  min-height: 100vh;
-}
-
-/* Sidebar Styles */
-.sidebar {
-  position: fixed;
-  left: 0;
-  top: 0;
-  width: 240px;
-  height: 100vh;
-  background: linear-gradient(180deg, #1e3c72 0%, #2a5298 100%);
-  backdrop-filter: blur(20px);
-  box-shadow: 4px 0 20px rgba(0, 0, 0, 0.15);
-  display: flex;
-  flex-direction: column;
-  z-index: 100;
-  color: white;
-}
-
-.sidebar-header {
-  padding: 30px 25px;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-}
-
-.logo {
-  display: flex;
-  align-items: center;
-  gap: 12px;
-  margin-bottom: 16px;
-}
-
-.logo-icon {
-  font-size: 1.8rem;
-}
-
-.sidebar-title {
-  margin: 0;
-  font-size: 1rem;
-  font-weight: 600;
-  color: white;
-}
-
-.sidebar-status {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-}
-
-.status-indicator {
-  width: 8px;
-  height: 8px;
-  border-radius: 50%;
-  background: #4ade80;
-  animation: pulse 2s infinite;
-}
-
-@keyframes pulse {
-  0%,
-  100% {
-    opacity: 1;
-  }
-  50% {
-    opacity: 0.5;
-  }
-}
-
-.status-text {
-  font-size: 0.85rem;
-  color: rgba(255, 255, 255, 0.8);
-}
-
-.sidebar-nav {
-  flex: 1;
-  padding: 20px 0;
-  overflow-y: auto;
-}
-
-.nav-item {
-  display: flex;
-  align-items: center;
-  gap: 12px;
-  padding: 14px 25px;
-  color: rgba(255, 255, 255, 0.8);
-  text-decoration: none;
-  transition: all 0.3s ease;
-  border-left: 3px solid transparent;
-}
-
-.nav-item:hover {
-  background: rgba(255, 255, 255, 0.1);
-  color: white;
-  border-left-color: #4ade80;
-}
-
-.nav-item.active {
-  background: rgba(255, 255, 255, 0.15);
-  color: white;
-  border-left-color: #4ade80;
-  font-weight: 600;
-}
-
-.nav-icon {
-  font-size: 1.2rem;
-}
-
-.nav-text {
-  font-size: 0.95rem;
-}
-
-/* Main Content Area */
-.admin-main {
-  margin-left: 240px;
-  flex: 1;
-  padding: 30px;
-  background: #f5f5f7;
-  min-height: 100vh;
-}
-
-/* Header */
-.admin-header {
-  display: flex;
-  justify-content: space-between;
-  align-items: flex-start;
-  margin-bottom: 30px;
-  background: white;
-  padding: 30px;
-  border-radius: 16px;
-  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
-}
-
-.header-left {
-  flex: 1;
-}
-
-.page-title {
-  font-size: 2rem;
-  font-weight: 700;
-  color: #1d1d1f;
-  margin: 0 0 10px 0;
-  display: flex;
-  align-items: center;
-  gap: 12px;
-}
-
-.title-icon {
-  font-size: 2rem;
-}
-
-.page-subtitle {
-  color: #86868b;
-  font-size: 1rem;
-  margin: 0;
-}
-
-.header-right {
-  display: flex;
-  flex-direction: column;
-  align-items: flex-end;
-  gap: 15px;
-}
-
-.stats-summary {
-  display: flex;
-  gap: 30px;
-}
-
-.stat-item {
-  text-align: center;
-}
-
-.stat-number {
-  display: block;
-  font-size: 2rem;
-  font-weight: 700;
-  color: #0071e3;
-}
-
-.stat-label {
-  display: block;
-  font-size: 0.9rem;
-  color: #86868b;
-  margin-top: 5px;
-}
-
-.back-to-store-btn {
-  display: inline-flex;
-  align-items: center;
-  gap: 8px;
-  padding: 10px 20px;
-  background: linear-gradient(135deg, #667eea, #764ba2);
-  color: white;
-  text-decoration: none;
-  border-radius: 10px;
-  font-weight: 600;
-  transition: all 0.3s ease;
-  box-shadow: 0 4px 12px rgba(102, 126, 234, 0.3);
-}
-
-.back-to-store-btn:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 6px 16px rgba(102, 126, 234, 0.4);
-}
-
-.back-to-store-btn .icon {
-  font-size: 1.2rem;
-}
+@import url('@/assets/styles/AdminStyles.css');
 
 /* Filter Tabs */
 .filter-tabs {

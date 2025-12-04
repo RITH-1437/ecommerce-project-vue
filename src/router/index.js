@@ -1,4 +1,5 @@
 import { createRouter, createWebHistory } from 'vue-router'
+import { useAuthStore } from '../stores/auth.js'
 import HomeView from '../views/HomeView.vue'
 import IPhoneView from '../views/IPhoneView.vue'
 import IPadView from '../views/IPadView.vue'
@@ -143,6 +144,88 @@ const router = createRouter({
       redirect: '/',
     },
   ],
+})
+
+// Navigation guards
+router.beforeEach((to, from, next) => {
+  const authStore = useAuthStore()
+
+  // Define routes that require authentication
+  const requiresAuth = [
+    '/my-orders',
+    '/checkout/cart',
+    '/checkout/payment',
+    '/checkout/receipt',
+    '/admin/overview',
+    '/admin/users',
+    '/admin/products',
+    '/admin/categories',
+    '/admin/orders',
+    '/admin/discounts',
+    '/admin/settings',
+    '/admin/reviews',
+    '/admin/contacts',
+  ]
+
+  // Check if route requires authentication
+  const requiresAuthentication = requiresAuth.some(route => to.path.startsWith(route))
+
+  if (requiresAuthentication && !authStore.isLoggedIn) {
+    // Redirect to auth page with return URL
+    next({ name: 'Auth', query: { redirect: to.fullPath } })
+    return
+  }
+
+  // Check admin routes
+  if (to.path.startsWith('/admin/')) {
+    if (!authStore.canAccessAdmin) {
+      // Not authorized for admin access
+      next('/')
+      return
+    }
+
+    // Specific admin route permissions
+    const adminRoutes = {
+      '/admin/users': 'canManageUsers',
+      '/admin/discounts': 'canManageDiscounts',
+      '/admin/settings': 'canManageSettings',
+    }
+
+    const requiredPermission = adminRoutes[to.path]
+    if (requiredPermission && !authStore.hasPermission(requiredPermission)) {
+      // Not authorized for this specific admin feature
+      next('/admin/overview')
+      return
+    }
+  }
+
+  // Check customer routes
+  if (to.path === '/my-orders' && !authStore.hasPermission('canPurchase')) {
+    next('/')
+    return
+  }
+
+  // If user is logged in and trying to access auth page, redirect to appropriate dashboard
+  if (to.name === 'Auth' && authStore.isLoggedIn) {
+    const redirectPath = authStore.isAdmin ? '/admin/overview' : '/'
+    next(redirectPath)
+    return
+  }
+
+  next()
+})
+
+// Router-level error handler
+router.onError((err) => {
+  try {
+    // Lazy import to avoid circular/early pinia usage
+    const { useErrorStore } = require('../stores/error.js')
+    const store = useErrorStore()
+    store.capture(err, 'Router navigation error')
+  } catch (e) {
+    // eslint-disable-next-line no-console
+    console.error('Router onError failed', e)
+  }
 })
 
 export default router

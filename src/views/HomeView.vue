@@ -72,7 +72,7 @@
                 :style="{ transform: `translateX(-${currentSlide * 33.333}%)` }"
               >
                 <div v-for="product in popularProducts" :key="product.id" class="product-slide">
-                  <div class="product-card-popular">
+                  <div class="product-card-popular" @click="showProductDetails(product)">
                     <div class="product-badge-popular">{{ product.badge }}</div>
                     <div class="product-image-popular">
                       <div class="product-icon">{{ product.image }}</div>
@@ -95,14 +95,6 @@
                         >
                       </div>
                       <div class="product-price">{{ product.price }}</div>
-                      <div class="product-actions">
-                        <button @click="showProductDetails(product)" class="product-btn-learn">
-                          Learn More
-                        </button>
-                        <button @click="addToCartAndNavigate(product)" class="product-btn-cart">
-                          🛒 Add to Cart
-                        </button>
-                      </div>
                     </div>
                   </div>
                 </div>
@@ -638,80 +630,10 @@ export default {
       }
     },
     showProductDetails(product) {
-      // Add descriptions to popular products if not present
-      if (product && !product.description) {
-        const descriptions = {
-          'iPhone 15 Pro Max':
-            'The most advanced iPhone yet, featuring titanium design, A17 Pro chip, and professional camera system with 5x Telephoto zoom.',
-          'iPhone 15':
-            'All-new iPhone with Dynamic Island, 48MP Main camera, and USB-C connectivity for a premium experience.',
-          'MacBook Air M3':
-            'Supercharged by the M3 chip, featuring up to 18 hours of battery life and stunning 13.6-inch Liquid Retina display.',
-          'AirPods Pro (2nd gen)':
-            'Personalized Spatial Audio with dynamic head tracking, Adaptive Transparency, and up to 6 hours of listening time.',
-          'Apple Watch Series 9':
-            'Advanced health and fitness features with the revolutionary S9 chip, Double Tap gesture, and Precision Finding.',
-          'iPad Pro 12.9"':
-            'The ultimate iPad experience with M2 chip, Liquid Retina XDR display, and support for Apple Pencil Pro.',
-        }
-        product.description =
-          descriptions[product.name] ||
-          'Premium Apple product with cutting-edge technology and exceptional build quality.'
-
-        // Add features based on product type
-        const features = {
-          'iPhone 15 Pro Max': [
-            'A17 Pro Chip',
-            'Titanium Design',
-            '5x Telephoto Camera',
-            'Action Button',
-            'USB-C',
-          ],
-          'iPhone 15': [
-            'A16 Bionic Chip',
-            'Dynamic Island',
-            '48MP Main Camera',
-            'USB-C',
-            'Ceramic Shield',
-          ],
-          'MacBook Air M3': [
-            'M3 Chip',
-            'Liquid Retina Display',
-            '18-hour Battery',
-            'MagSafe Charging',
-            'Silent Design',
-          ],
-          'AirPods Pro (2nd gen)': [
-            'H2 Chip',
-            'Active Noise Cancellation',
-            'Spatial Audio',
-            'MagSafe Charging',
-            'Sweat Resistant',
-          ],
-          'Apple Watch Series 9': [
-            'S9 Chip',
-            'Double Tap',
-            'Always-On Display',
-            'Blood Oxygen',
-            'ECG App',
-          ],
-          'iPad Pro 12.9"': [
-            'M2 Chip',
-            'Liquid Retina XDR',
-            'Apple Pencil Pro',
-            '12MP Cameras',
-            '5G Connectivity',
-          ],
-        }
-        product.features = features[product.name] || [
-          'Premium Design',
-          'Advanced Technology',
-          'Exceptional Performance',
-        ]
+      // Navigate to category page if route is available
+      if (product && product.route) {
+        this.$router.push(product.route)
       }
-
-      this.selectedProduct = product
-      this.showModal = true
     },
     closeModal() {
       this.showModal = false
@@ -995,22 +917,77 @@ export default {
 
 .category-card {
   position: relative;
-  background: var(--background-card);
-  border-radius: var(--border-radius);
+  background: white;
+  border-radius: 24px;
   padding: 40px 30px;
   text-align: center;
   text-decoration: none;
   color: var(--text-primary);
-  box-shadow: var(--card-shadow);
-  transition: var(--transition);
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
   overflow: hidden;
-  backdrop-filter: blur(20px);
-  border: 1px solid rgba(255, 255, 255, 0.2);
+  border: 1px solid rgba(0, 0, 0, 0.08);
+  box-shadow:
+    0 2px 8px rgba(0, 0, 0, 0.04),
+    0 4px 16px rgba(0, 0, 0, 0.06),
+    inset 0 1px 0 rgba(255, 255, 255, 0.8);
+}
+
+.category-card::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: 24px;
+  padding: 2px;
+  background: linear-gradient(135deg, #0066cc, #0077ed, #00c6ff);
+  -webkit-mask:
+    linear-gradient(#fff 0 0) content-box,
+    linear-gradient(#fff 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+  opacity: 0;
+  transition: opacity 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  pointer-events: none;
+}
+
+.category-card::after {
+  content: '';
+  position: absolute;
+  inset: -1px;
+  border-radius: 24px;
+  background: linear-gradient(135deg, rgba(0, 102, 204, 0.1), rgba(0, 199, 255, 0.1));
+  opacity: 0;
+  transition: opacity 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  z-index: -1;
 }
 
 .category-card:hover {
-  transform: translateY(-10px);
-  box-shadow: var(--hover-shadow);
+  transform: translateY(-12px) scale(1.02);
+  border-color: rgba(0, 102, 204, 0.2);
+  box-shadow:
+    0 8px 24px rgba(0, 0, 0, 0.08),
+    0 16px 48px rgba(0, 102, 204, 0.15),
+    0 0 0 1px rgba(0, 102, 204, 0.1),
+    inset 0 1px 0 rgba(255, 255, 255, 1),
+    inset 0 -1px 2px rgba(0, 102, 204, 0.05);
+}
+
+.category-card:hover::before {
+  opacity: 1;
+  animation: borderShine 2.5s ease-in-out infinite;
+}
+
+.category-card:hover::after {
+  opacity: 1;
+}
+
+@keyframes borderShine {
+  0%,
+  100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.7;
+  }
 }
 
 .category-icon {
@@ -1462,6 +1439,7 @@ export default {
   height: 400px;
   display: flex;
   flex-direction: column;
+  cursor: pointer;
 }
 
 .product-card-popular:hover {

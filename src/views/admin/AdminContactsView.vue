@@ -75,6 +75,10 @@
                 <span class="icon">📊</span>
                 <span>Dashboard</span>
               </router-link>
+              <router-link to="/" class="back-to-store-btn">
+                <span class="icon"><i class="fas fa-store"></i></span>
+                <span>Back to Store</span>
+              </router-link>
             </div>
           </div>
         </div>
@@ -182,9 +186,15 @@
                     class="action-icon-btn"
                     :title="selectedMessage.isRead ? 'Mark as Unread' : 'Mark as Read'"
                   >
-                    <i :class="selectedMessage.isRead ? 'fas fa-envelope-open' : 'fas fa-envelope'"></i>
+                    <i
+                      :class="selectedMessage.isRead ? 'fas fa-envelope-open' : 'fas fa-envelope'"
+                    ></i>
                   </button>
-                  <button @click="deleteMessage(selectedMessage)" class="action-icon-btn delete" title="Delete">
+                  <button
+                    @click="deleteMessage(selectedMessage)"
+                    class="action-icon-btn delete"
+                    title="Delete"
+                  >
                     <i class="fas fa-trash"></i>
                   </button>
                 </div>
@@ -365,7 +375,7 @@ export default {
     const selectMessage = (message) => {
       selectedMessage.value = message
       replyText.value = ''
-      
+
       // Mark as read when selected
       if (!message.isRead) {
         contactStore.markAsRead(message.id)
@@ -394,7 +404,7 @@ export default {
       if (result.isConfirmed) {
         contactStore.deleteMessage(message.id)
         selectedMessage.value = null
-        
+
         Swal.fire({
           icon: 'success',
           title: 'Deleted!',
@@ -507,7 +517,7 @@ export default {
 }
 
 .sidebar-header {
-  padding: 30px 25px;
+  padding: 25px 20px;
   border-bottom: 1px solid rgba(255, 255, 255, 0.1);
 }
 
@@ -557,13 +567,13 @@ export default {
 
 .sidebar-nav {
   flex: 1;
-  padding: 20px 0;
+  padding: 15px 0;
 }
 
 .nav-item {
   display: flex;
   align-items: center;
-  padding: 16px 25px;
+  padding: 12px 20px;
   text-decoration: none;
   color: rgba(255, 255, 255, 0.8);
   transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
@@ -592,15 +602,16 @@ export default {
 }
 
 .nav-icon {
-  margin-right: 14px;
-  font-size: 1.2rem;
-  width: 20px;
+  margin-right: 12px;
+  font-size: 1.1rem;
+  width: 18px;
   text-align: center;
 }
 
 .nav-text {
   font-weight: 500;
   flex: 1;
+  font-size: 0.9rem;
 }
 
 .nav-badge {
@@ -621,6 +632,12 @@ export default {
   padding: 0;
   overflow-y: auto;
   background: #f8f9fb;
+}
+
+/* Sidebar Footer */
+.sidebar-footer {
+  padding: 15px 20px;
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
 }
 
 .dashboard-header {
@@ -1243,4 +1260,33 @@ export default {
     gap: 16px;
   }
 }
+
+/* Back to Store Button - Override scoped styles */
+.back-to-store-btn {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%) !important;
+  color: white !important;
+  padding: 8px 16px !important;
+  border-radius: 8px !important;
+  text-decoration: none !important;
+  font-weight: 500 !important;
+  font-size: 0.9rem !important;
+  transition: all 0.3s ease !important;
+  display: flex !important;
+  align-items: center !important;
+  gap: 6px !important;
+  box-shadow: 0 2px 8px rgba(102, 126, 234, 0.2) !important;
+}
+
+.back-to-store-btn .icon {
+  font-size: 1rem !important;
+}
+
+.back-to-store-btn:hover {
+  transform: translateY(-1px) !important;
+  box-shadow: 0 4px 12px rgba(102, 126, 234, 0.3) !important;
+}
+</style>
+
+<style>
+@import url('@/assets/styles/AdminStyles.css');
 </style>

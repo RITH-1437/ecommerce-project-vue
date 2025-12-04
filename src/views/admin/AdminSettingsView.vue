@@ -30,6 +30,10 @@
             <span class="nav-icon"><i class="fas fa-users"></i></span>
             <span class="nav-text">Users</span>
           </router-link>
+          <router-link to="/admin/contacts" class="nav-item">
+            <span class="nav-icon"><i class="fas fa-envelope"></i></span>
+            <span class="nav-text">Contacts</span>
+          </router-link>
           <router-link to="/admin/discounts" class="nav-item">
             <span class="nav-icon"><i class="fas fa-tags"></i></span>
             <span class="nav-text">Discounts</span>
@@ -54,7 +58,7 @@
         <!-- Header -->
         <div class="admin-header">
           <div class="header-left">
-            <h1 class="page-title">Store Settings</h1>
+            <h1 class="page-title">⚙️ Store Settings</h1>
             <p class="page-subtitle">Manage your store's configuration settings</p>
           </div>
           <div class="header-right">
@@ -111,16 +115,6 @@
                 min="0"
                 max="100"
                 step="0.1"
-              />
-            </div>
-            <div class="form-group">
-              <label class="form-label">Shipping Fee ($)</label>
-              <input
-                type="number"
-                class="form-input"
-                v-model.number="settings.shippingFee"
-                min="0"
-                step="0.01"
               />
             </div>
           </div>
@@ -219,7 +213,6 @@ const settings = ref({
   storeAddress: 'Russian Conf Norodom Boulevard, Phnom Penh 120404, Cambodia',
   currency: 'USD',
   taxRate: 10,
-  shippingFee: 5.0,
   openingTime: '09:00',
   closingTime: '20:00',
   notifications: {

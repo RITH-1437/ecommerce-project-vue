@@ -30,6 +30,10 @@
             <span class="nav-icon"><i class="fas fa-users"></i></span>
             <span class="nav-text">Users</span>
           </router-link>
+          <router-link to="/admin/contacts" class="nav-item">
+            <span class="nav-icon"><i class="fas fa-envelope"></i></span>
+            <span class="nav-text">Contacts</span>
+          </router-link>
           <router-link to="/admin/discounts" class="nav-item" active-class="active">
             <span class="nav-icon"><i class="fas fa-tags"></i></span>
             <span class="nav-text">Discounts</span>
@@ -54,7 +58,7 @@
         <!-- Header -->
         <div class="admin-header">
           <div class="header-left">
-            <h1 class="page-title">Discounts & Promotions</h1>
+            <h1 class="page-title">🏷️ Discounts & Promotions</h1>
           </div>
           <div class="header-right">
             <button @click="openAddModal" class="add-btn">+ New Discount</button>
@@ -385,23 +389,23 @@ code {
 }
 
 .action-btn.edit {
-  background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+  background: linear-gradient(135deg, #0066cc 0%, #0077ed 100%);
   color: white;
 }
 
 .action-btn.edit:hover {
   transform: translateY(-2px);
-  box-shadow: 0 4px 12px rgba(79, 172, 254, 0.4);
+  box-shadow: 0 4px 12px rgba(0, 102, 204, 0.4);
 }
 
 .action-btn.delete {
-  background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+  background: linear-gradient(135deg, #ff3b30 0%, #ff1744 100%);
   color: white;
 }
 
 .action-btn.delete:hover {
   transform: translateY(-2px);
-  box-shadow: 0 4px 12px rgba(245, 87, 108, 0.4);
+  box-shadow: 0 4px 12px rgba(255, 59, 48, 0.4);
 }
 
 .no-data {

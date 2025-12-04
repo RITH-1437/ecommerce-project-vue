@@ -16,7 +16,7 @@
   position: fixed;
   left: 0;
   top: 0;
-  width: 240px;
+  width: 220px;
   height: 100vh;
   background: linear-gradient(180deg, #1e3c72 0%, #2a5298 100%);
   backdrop-filter: blur(20px);
@@ -29,7 +29,7 @@
 }
 
 .sidebar-header {
-  padding: 30px 25px;
+  padding: 25px 20px;
   border-bottom: 1px solid rgba(255, 255, 255, 0.1);
 }
 
@@ -87,7 +87,7 @@
 
 .sidebar-nav {
   flex: 1;
-  padding: 20px 0;
+  padding: 15px 0;
   overflow-y: hidden !important;
   overflow-x: hidden !important;
 }
@@ -95,7 +95,7 @@
 .nav-item {
   display: flex;
   align-items: center;
-  padding: 16px 25px;
+  padding: 12px 20px;
   text-decoration: none;
   color: rgba(255, 255, 255, 0.8);
   transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
@@ -126,15 +126,16 @@
 }
 
 .nav-icon {
-  margin-right: 14px;
-  font-size: 1.2rem;
-  width: 20px;
+  margin-right: 12px;
+  font-size: 1.1rem;
+  width: 18px;
   text-align: center;
 }
 
 .nav-text {
   font-weight: 500;
   flex: 1;
+  font-size: 0.9rem;
 }
 
 .nav-badge {
@@ -149,7 +150,7 @@
 }
 
 .sidebar-footer {
-  padding: 20px 25px;
+  padding: 15px 20px;
   border-top: 1px solid rgba(255, 255, 255, 0.1);
 }
 
@@ -186,7 +187,7 @@
 /* Main Admin Content */
 .admin-main {
   flex: 1;
-  margin-left: 240px;
+  margin-left: 220px;
   padding: 0;
   overflow-y: auto;
   background: #f8f9fa;
@@ -217,24 +218,25 @@
 .back-to-store-btn {
   background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
   color: white;
-  padding: 12px 20px;
-  border-radius: 12px;
+  padding: 8px 16px;
+  border-radius: 8px;
   text-decoration: none;
   font-weight: 500;
+  font-size: 0.9rem;
   transition: all 0.3s ease;
   display: flex;
   align-items: center;
-  gap: 8px;
-  box-shadow: 0 4px 15px rgba(102, 126, 234, 0.2);
+  gap: 6px;
+  box-shadow: 0 2px 8px rgba(102, 126, 234, 0.2);
 }
 
 .back-to-store-btn .icon {
-  font-size: 1.1rem;
+  font-size: 1rem;
 }
 
 .back-to-store-btn:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 8px 25px rgba(102, 126, 234, 0.3);
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(102, 126, 234, 0.3);
 }
 
 /* Content Sections */
