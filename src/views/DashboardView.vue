@@ -82,7 +82,7 @@
                 >
               </div>
               <router-link to="/" class="back-to-store-btn">
-                <span class="icon">🏪</span>
+                <span class="icon"><i class="fas fa-store"></i></span>
                 <span>Back to Store</span>
               </router-link>
             </div>
@@ -786,7 +786,7 @@ export default {
 }
 
 .sidebar-header {
-  padding: 30px 25px;
+  padding: 25px 20px;
   border-bottom: 1px solid rgba(255, 255, 255, 0.1);
 }
 
@@ -836,13 +836,13 @@ export default {
 
 .sidebar-nav {
   flex: 1;
-  padding: 20px 0;
+  padding: 15px 0;
 }
 
 .nav-item {
   display: flex;
   align-items: center;
-  padding: 16px 25px;
+  padding: 12px 20px;
   text-decoration: none;
   color: rgba(255, 255, 255, 0.8);
   transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
@@ -871,15 +871,16 @@ export default {
 }
 
 .nav-icon {
-  margin-right: 14px;
-  font-size: 1.2rem;
-  width: 20px;
+  margin-right: 12px;
+  font-size: 1.1rem;
+  width: 18px;
   text-align: center;
 }
 
 .nav-text {
   font-weight: 500;
   flex: 1;
+  font-size: 0.9rem;
 }
 
 .nav-badge {
@@ -894,7 +895,7 @@ export default {
 }
 
 .sidebar-footer {
-  padding: 20px 25px;
+  padding: 15px 20px;
   border-top: 1px solid rgba(255, 255, 255, 0.1);
 }
 
@@ -1035,24 +1036,6 @@ export default {
   padding: 8px 12px;
   background: #f8f9fa;
   border-radius: 8px;
-}
-
-.back-to-store-btn {
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-  color: white;
-  padding: 12px 20px;
-  border-radius: 12px;
-  text-decoration: none;
-  font-weight: 500;
-  transition: all 0.3s ease;
-  display: flex;
-  align-items: center;
-  gap: 8px;
-}
-
-.back-to-store-btn:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 8px 25px rgba(102, 126, 234, 0.3);
 }
 
 /* Loading States */
@@ -1907,4 +1890,33 @@ export default {
     margin-top: 8px;
   }
 }
+
+/* Back to Store Button - Override scoped styles */
+.back-to-store-btn {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%) !important;
+  color: white !important;
+  padding: 8px 16px !important;
+  border-radius: 8px !important;
+  text-decoration: none !important;
+  font-weight: 500 !important;
+  font-size: 0.9rem !important;
+  transition: all 0.3s ease !important;
+  display: flex !important;
+  align-items: center !important;
+  gap: 6px !important;
+  box-shadow: 0 2px 8px rgba(102, 126, 234, 0.2) !important;
+}
+
+.back-to-store-btn .icon {
+  font-size: 1rem !important;
+}
+
+.back-to-store-btn:hover {
+  transform: translateY(-1px) !important;
+  box-shadow: 0 4px 12px rgba(102, 126, 234, 0.3) !important;
+}
+</style>
+
+<style>
+@import url('@/assets/styles/AdminStyles.css');
 </style>

@@ -1,7 +1,10 @@
 <template>
   <header class="app-header">
     <div class="container">
-      <router-link to="/" class="nav-brand">{{ logoText }}</router-link>
+      <div class="nav-brand" @click="goToHome">
+        <span class="brand-icon"><i class="fab fa-apple"></i></span>
+        <span class="brand-text">{{ logoText }}</span>
+      </div>
       <div v-if="showSearch" class="search-container">
         <input
           type="text"
@@ -268,6 +271,11 @@ export default {
     goToCart() {
       this.$router.push('/checkout/cart')
     },
+
+    goToHome() {
+      // Force page reload by using window.location
+      window.location.href = '/'
+    },
     async logout() {
       this.isDropdownOpen = false
 
@@ -318,15 +326,35 @@ export default {
 }
 
 .nav-brand {
+  display: flex;
+  align-items: center;
+  gap: 8px;
   font-size: 22px;
   font-weight: 700;
   color: #1d1d1f;
   text-decoration: none;
   transition: all 0.3s ease;
+  cursor: pointer;
 }
 
 .nav-brand:hover {
   color: #0071e3;
+}
+
+.brand-icon {
+  font-size: 1.8rem;
+  color: #0071e3;
+  transition: all 0.3s ease;
+}
+
+.nav-brand:hover .brand-icon {
+  color: #0056b3;
+  transform: scale(1.05);
+}
+
+.brand-text {
+  font-size: 22px;
+  font-weight: 700;
 }
 
 .search-container {

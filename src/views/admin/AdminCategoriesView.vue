@@ -30,6 +30,10 @@
             <span class="nav-icon"><i class="fas fa-users"></i></span>
             <span class="nav-text">Users</span>
           </router-link>
+          <router-link to="/admin/contacts" class="nav-item">
+            <span class="nav-icon"><i class="fas fa-envelope"></i></span>
+            <span class="nav-text">Contacts</span>
+          </router-link>
           <router-link to="/admin/discounts" class="nav-item">
             <span class="nav-icon"><i class="fas fa-tags"></i></span>
             <span class="nav-text">Discounts</span>
@@ -54,7 +58,7 @@
         <!-- Header -->
         <div class="admin-header">
           <div class="header-left">
-            <h1 class="page-title">Categories</h1>
+            <h1 class="page-title">📁 Categories</h1>
           </div>
           <div class="header-right">
             <button @click="openAddModal" class="add-btn">+ Add Category</button>
@@ -537,21 +541,23 @@ const openSupport = () => {
 }
 
 .action-btn.edit {
-  background: #007bff;
+  background: linear-gradient(135deg, #0066cc 0%, #0077ed 100%);
   color: white;
   margin-right: 8px;
 }
 
 .action-btn.edit:hover {
-  background: #0056b3;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0, 102, 204, 0.4);
 }
 
 .action-btn.delete {
-  background: #dc3545;
+  background: linear-gradient(135deg, #ff3b30 0%, #ff1744 100%);
   color: white;
 }
 
 .action-btn.delete:hover {
-  background: #c82333;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(255, 59, 48, 0.4);
 }
 </style>

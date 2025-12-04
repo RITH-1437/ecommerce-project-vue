@@ -31,6 +31,10 @@
             <span class="nav-icon"><i class="fas fa-users"></i></span>
             <span class="nav-text">Users</span>
           </router-link>
+          <router-link to="/admin/contacts" class="nav-item">
+            <span class="nav-icon"><i class="fas fa-envelope"></i></span>
+            <span class="nav-text">Contacts</span>
+          </router-link>
           <router-link to="/admin/discounts" class="nav-item">
             <span class="nav-icon"><i class="fas fa-tags"></i></span>
             <span class="nav-text">Discounts</span>
@@ -55,7 +59,7 @@
         <!-- Header -->
         <div class="admin-header">
           <div class="header-left">
-            <h1 class="page-title">Orders</h1>
+            <h1 class="page-title">📦 Orders</h1>
           </div>
           <div class="header-right">
             <router-link to="/" class="back-to-store-btn">
@@ -174,14 +178,7 @@ const viewOrderDetails = (orderId) => {
   const order = orders.value.find((o) => o.id === orderId)
   if (!order) return
 
-  const statusColor =
-    {
-      pending: '#ffc107',
-      processing: '#17a2b8',
-      shipped: '#007bff',
-      delivered: '#28a745',
-      cancelled: '#dc3545',
-    }[order.status] || '#6c757d'
+  const statusColor = '#6c757d' // Use single color for all statuses
 
   Swal.fire({
     title: `<div style="color: #1d1d1f; font-size: 1.5rem; font-weight: 600;">${orderId}</div>`,
@@ -222,11 +219,6 @@ const viewOrderDetails = (orderId) => {
           </ul>
         </div>
 
-        <div style="margin-top: 20px; padding: 15px; background: #e7f3ff; border-left: 4px solid #007bff; border-radius: 4px;">
-          <p style="margin: 0; font-size: 0.85rem; color: #004085;">
-            <strong>📍 Note:</strong> Shipping address and tracking details will be available once the system is integrated with the backend API.
-          </p>
-        </div>
       </div>
     `,
     width: '600px',
@@ -256,34 +248,10 @@ const viewOrderDetails = (orderId) => {
   outline: none;
 }
 
-.status-select.status-pending {
-  background: #f5f5f5;
-  color: #666;
-  border-color: #ddd;
-}
-
-.status-select.status-processing {
-  background: #fff3e0;
-  color: #f57c00;
-  border-color: #ffb74d;
-}
-
-.status-select.status-shipped {
-  background: #e3f2fd;
-  color: #1976d2;
-  border-color: #64b5f6;
-}
-
-.status-select.status-delivered {
-  background: #e8f5e8;
-  color: #2e7d32;
-  border-color: #81c784;
-}
-
-.status-select.status-cancelled {
-  background: #ffebee;
-  color: #c62828;
-  border-color: #e57373;
+.status-select {
+  background: #f8f9fa;
+  color: #495057;
+  border-color: #dee2e6;
 }
 
 .status-select:hover {

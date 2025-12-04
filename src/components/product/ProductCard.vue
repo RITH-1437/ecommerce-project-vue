@@ -100,11 +100,52 @@ export default {
   cursor: pointer;
   position: relative;
   overflow: hidden;
+  border: 2px solid transparent;
+  background-clip: padding-box;
+  background-image:
+    linear-gradient(white, white), linear-gradient(135deg, #0066cc, #0077ed, #00c6ff);
+  background-origin: padding-box, border-box;
+}
+
+.product-card::after {
+  content: '';
+  position: absolute;
+  inset: -2px;
+  border-radius: 20px;
+  padding: 2px;
+  background: linear-gradient(135deg, #0066cc, #0077ed, #00c6ff);
+  -webkit-mask:
+    linear-gradient(#fff 0 0) content-box,
+    linear-gradient(#fff 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+  opacity: 0;
+  transition: opacity 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  pointer-events: none;
+  z-index: -1;
 }
 
 .product-card:hover {
   transform: translateY(-8px);
-  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.15);
+  box-shadow:
+    0 20px 60px rgba(0, 0, 0, 0.15),
+    0 0 40px rgba(0, 102, 204, 0.3),
+    inset 0 0 30px rgba(0, 102, 204, 0.05);
+}
+
+.product-card:hover::after {
+  opacity: 1;
+  animation: borderPulse 2s ease-in-out infinite;
+}
+
+@keyframes borderPulse {
+  0%,
+  100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.5;
+  }
 }
 
 .product-card::before {
@@ -117,6 +158,7 @@ export default {
   background: linear-gradient(90deg, #0071e3, #00c7be);
   transform: scaleX(0);
   transition: transform 0.3s ease;
+  z-index: 1;
 }
 
 .product-card:hover::before {
