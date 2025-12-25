@@ -31,9 +31,19 @@ build/
 ### VS Code ###
 .vscode/
 
+# Environment variables and secrets
+.env
+.env.local
+.env.production
+application-local.properties
+application-dev.properties
+
 # Ignore PowerShell and batch files in root, but allow them in pws/ folder
 *.ps1
 *.bat
 !pws/*.ps1
 !pws/*.bat
+
+nul
+
 

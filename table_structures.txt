@@ -1,0 +1,24 @@
+﻿*************************** 1. row ***************************
+       Table: users
+Create Table: CREATE TABLE `users` (
+  `id` bigint NOT NULL AUTO_INCREMENT,
+  `avatar_url` varchar(255) DEFAULT NULL,
+  `created_at` datetime(6) DEFAULT NULL,
+  `email` varchar(255) NOT NULL,
+  `email_verified` bit(1) NOT NULL,
+  `google_id` varchar(255) DEFAULT NULL,
+  `is_active` bit(1) NOT NULL,
+  `last_login` datetime(6) DEFAULT NULL,
+  `name` varchar(255) DEFAULT NULL,
+  `password_hash` varchar(255) DEFAULT NULL,
+  `phone` varchar(255) DEFAULT NULL,
+  `role` varchar(50) DEFAULT 'CUSTOMER',
+  `total_orders` int DEFAULT NULL,
+  `updated_at` datetime(6) DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `UK6dotkott2kjsp8vw4d0m25fb7` (`email`),
+  UNIQUE KEY `UKovh8xmu9ac27t18m56gri58i1` (`google_id`),
+  KEY `idx_email` (`email`),
+  KEY `idx_google_id` (`google_id`),
+  KEY `idx_role` (`role`)
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci

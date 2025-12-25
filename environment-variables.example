@@ -1,0 +1,36 @@
+# Environment Variables for Local Development
+# Copy this file to .env or set these environment variables
+
+# Database Configuration
+DB_PASSWORD=Iloveyouforever@096
+
+# JWT Configuration
+JWT_SECRET=ILOVEYOUFOREVER_1437_143_5201314_@_0966273314
+
+# Google OAuth2 Configuration
+GOOGLE_CLIENT_ID=526699009685-7m4br5u539va9ls80ge99vpp7qulm3s9.apps.googleusercontent.com
+GOOGLE_CLIENT_SECRET=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
+
+# ABA PayWay Configuration
+PAYWAY_MERCHANT_ID=ec462838
+PAYWAY_API_KEY=3a29307362b55f16c1eaaf402df554c296736383
+PAYWAY_SECRET_KEY=Iloveyouforever@096
+
+# OpenAI API Key
+OPENAI_API_KEY=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
+
+# Instructions:
+# 1. Set these environment variables in your system OR
+# 2. Copy this file to .env and use a library like spring-boot-dotenv OR
+# 3. Set them in your IDE's run configuration OR
+# 4. Set them in application-local.properties (which should be in .gitignore)
+
+# For PowerShell (Windows):
+# $env:DB_PASSWORD="Iloveyouforever@096"
+# $env:GOOGLE_CLIENT_ID="526699009685-7m4br5u539va9ls80ge99vpp7qulm3s9.apps.googleusercontent.com"
+# etc...
+
+# For Bash (Linux/Mac):
+# export DB_PASSWORD="Iloveyouforever@096"
+# export GOOGLE_CLIENT_ID="526699009685-7m4br5u539va9ls80ge99vpp7qulm3s9.apps.googleusercontent.com"
+# etc...
