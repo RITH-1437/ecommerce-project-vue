@@ -5,15 +5,15 @@ Write-Host "========================================" -ForegroundColor Cyan
 Write-Host ""
 
 # Set environment variables
-$env:DB_PASSWORD="Iloveyouforever@096"
+$env:DB_PASSWORD="your_mysql_password_here"
 $env:SPRING_PROFILES_ACTIVE="default"
-$env:JWT_SECRET="ILOVEYOUFOREVER_1437_143_5201314_@_0966273314"
-$env:GOOGLE_CLIENT_ID="526699009685-7m4br5u539va9ls80ge99vpp7qulm3s9.apps.googleusercontent.com"
-$env:GOOGLE_CLIENT_SECRET="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"
-$env:PAYWAY_MERCHANT_ID="ec462838"
-$env:PAYWAY_API_KEY="3a29307362b55f16c1eaaf402df554c296736383"
-$env:PAYWAY_SECRET_KEY="Iloveyouforever@096"
-$env:OPENAI_API_KEY="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"
+$env:JWT_SECRET="your_jwt_secret_key_here_at_least_256_bits"
+$env:GOOGLE_CLIENT_ID="your_google_client_id_here.apps.googleusercontent.com"
+$env:GOOGLE_CLIENT_SECRET="your_google_client_secret_here"
+$env:PAYWAY_MERCHANT_ID="your_payway_merchant_id"
+$env:PAYWAY_API_KEY="your_payway_api_key"
+$env:PAYWAY_SECRET_KEY="your_payway_secret_key"
+$env:OPENAI_API_KEY="sk-proj-your_openai_api_key_here"
 
 Write-Host "🔧 Configuration:" -ForegroundColor Yellow
 Write-Host "   Database: appl_store" -ForegroundColor White
