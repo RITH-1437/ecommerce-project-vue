@@ -8,12 +8,12 @@ Write-Host ""
 $env:DB_PASSWORD="your_mysql_password_here"
 $env:SPRING_PROFILES_ACTIVE="default"
 $env:JWT_SECRET="your_jwt_secret_key_here_at_least_256_bits"
-$env:GOOGLE_CLIENT_ID="your_google_client_id_here.apps.googleusercontent.com"
-$env:GOOGLE_CLIENT_SECRET="your_google_client_secret_here"
+# $env:GOOGLE_CLIENT_ID="your_google_client_id_here.apps.googleusercontent.com"
+# $env:GOOGLE_CLIENT_SECRET="your_google_client_secret_here"
 $env:PAYWAY_MERCHANT_ID="your_payway_merchant_id"
 $env:PAYWAY_API_KEY="your_payway_api_key"
 $env:PAYWAY_SECRET_KEY="your_payway_secret_key"
-$env:OPENAI_API_KEY="sk-proj-your_openai_api_key_here"
+# $env:OPENAI_API_KEY="sk-proj-your_openai_api_key_here"
 
 Write-Host "🔧 Configuration:" -ForegroundColor Yellow
 Write-Host "   Database: appl_store" -ForegroundColor White
