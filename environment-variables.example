@@ -8,16 +8,11 @@ DB_PASSWORD=
 JWT_SECRET=
 
 # Google OAuth2 Configuration
-GOOGLE_CLIENT_ID=
-GOOGLE_CLIENT_SECRET=
-
-# ABA PayWay Configuration
-PAYWAY_MERCHANT_ID=
-PAYWAY_API_KEY=
-PAYWAY_SECRET_KEY=
+# GOOGLE_CLIENT_ID=
+# GOOGLE_CLIENT_SECRET=
 
 # OpenAI API Key
-OPENAI_API_KEY=
+# OPENAI_API_KEY=
 
 # Instructions:
 # 1. Set these environment variables in your system OR
