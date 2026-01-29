@@ -19,4 +19,10 @@ public interface ReviewService {
     List<Review> findByUserId(Long userId);
 
     List<Review> findByStatus(ReviewStatus status);
+
+    Review incrementHelpfulCount(Long id);
+
+    Review approve(Long id);
+
+    Review reject(Long id);
 }

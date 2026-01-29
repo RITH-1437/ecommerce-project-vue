@@ -57,4 +57,30 @@ public class ReviewServiceImpl implements ReviewService {
     public List<Review> findByStatus(ReviewStatus status) {
         return reviewRepository.findByStatus(status);
     }
+
+    @Override
+    public Review incrementHelpfulCount(Long id) {
+        Review review = reviewRepository.findById(id)
+                .orElseThrow(() -> new BusinessException("Review not found"));
+        review.setHelpfulCount(review.getHelpfulCount() + 1);
+        return reviewRepository.save(review);
+    }
+
+    @Override
+    public Review approve(Long id) {
+        Review review = reviewRepository.findById(id)
+                .orElseThrow(() -> new BusinessException("Review not found"));
+        review.setStatus(ReviewStatus.APPROVED);
+        review.setApproved(true);
+        return reviewRepository.save(review);
+    }
+
+    @Override
+    public Review reject(Long id) {
+        Review review = reviewRepository.findById(id)
+                .orElseThrow(() -> new BusinessException("Review not found"));
+        review.setStatus(ReviewStatus.REJECTED);
+        review.setApproved(false);
+        return reviewRepository.save(review);
+    }
 }

@@ -1,8 +1,13 @@
 package com.demo.backend.service.impl;
 
+import com.demo.backend.dto.FilterOptionsDTO;
+import com.demo.backend.dto.ProductSearchDTO;
 import com.demo.backend.exception.BusinessException;
 import com.demo.backend.model.*;
+import com.demo.backend.repository.CategoryRepository;
+import com.demo.backend.repository.ProductColorRepository;
 import com.demo.backend.repository.ProductRepository;
+import com.demo.backend.repository.ProductSpecificationRepository;
 import com.demo.backend.service.ProductService;
 
 import jakarta.persistence.EntityManager;
@@ -30,6 +35,9 @@ public class ProductServiceImpl implements ProductService {
     private static final Logger log = LoggerFactory.getLogger(ProductServiceImpl.class);
 
     private final ProductRepository productRepository;
+    private final CategoryRepository categoryRepository;
+    private final ProductColorRepository productColorRepository;
+    private final ProductSpecificationRepository productSpecificationRepository;
 
     @PersistenceContext
     private EntityManager em;
@@ -39,13 +47,10 @@ public class ProductServiceImpl implements ProductService {
     // ----------------------------------------------------
     @Override
     @Transactional
-    @Caching(
-            put = @CachePut(value = "products", key = "#result.id"),
-            evict = {
-                    @CacheEvict(value = "products_all", allEntries = true),
-                    @CacheEvict(value = "products_by_category", allEntries = true)
-            }
-    )
+    @Caching(put = @CachePut(value = "products", key = "#result.id"), evict = {
+            @CacheEvict(value = "products_all", allEntries = true),
+            @CacheEvict(value = "products_by_category", allEntries = true)
+    })
     public Product create(Product product) {
 
         if (product.getSlug() != null && productRepository.existsBySlug(product.getSlug())) {
@@ -73,14 +78,11 @@ public class ProductServiceImpl implements ProductService {
     // ----------------------------------------------------
     @Override
     @Transactional
-    @Caching(
-            put = @CachePut(value = "products", key = "#id"),
-            evict = {
-                    @CacheEvict(value = "products_all", allEntries = true),
-                    @CacheEvict(value = "products_by_slug", allEntries = true),
-                    @CacheEvict(value = "products_by_category", allEntries = true)
-            }
-    )
+    @Caching(put = @CachePut(value = "products", key = "#id"), evict = {
+            @CacheEvict(value = "products_all", allEntries = true),
+            @CacheEvict(value = "products_by_slug", allEntries = true),
+            @CacheEvict(value = "products_by_category", allEntries = true)
+    })
     public Product update(Long id, Product incoming) {
 
         Product existing = productRepository.findById(id)
@@ -101,16 +103,26 @@ public class ProductServiceImpl implements ProductService {
         }
 
         // Scalars
-        if (incoming.getName() != null) existing.setName(incoming.getName());
-        if (incoming.getCategory() != null) existing.setCategory(incoming.getCategory());
-        if (incoming.getDescription() != null) existing.setDescription(incoming.getDescription());
-        if (incoming.getShortDescription() != null) existing.setShortDescription(incoming.getShortDescription());
-        if (incoming.getPrice() != null) existing.setPrice(incoming.getPrice());
-        if (incoming.getOriginalPrice() != null) existing.setOriginalPrice(incoming.getOriginalPrice());
-        if (incoming.getStock() != null) existing.setStock(incoming.getStock());
-        if (incoming.getMinStock() != null) existing.setMinStock(incoming.getMinStock());
-        if (incoming.getBadge() != null) existing.setBadge(incoming.getBadge());
-        if (incoming.getImageUrl() != null) existing.setImageUrl(incoming.getImageUrl());
+        if (incoming.getName() != null)
+            existing.setName(incoming.getName());
+        if (incoming.getCategory() != null)
+            existing.setCategory(incoming.getCategory());
+        if (incoming.getDescription() != null)
+            existing.setDescription(incoming.getDescription());
+        if (incoming.getShortDescription() != null)
+            existing.setShortDescription(incoming.getShortDescription());
+        if (incoming.getPrice() != null)
+            existing.setPrice(incoming.getPrice());
+        if (incoming.getOriginalPrice() != null)
+            existing.setOriginalPrice(incoming.getOriginalPrice());
+        if (incoming.getStock() != null)
+            existing.setStock(incoming.getStock());
+        if (incoming.getMinStock() != null)
+            existing.setMinStock(incoming.getMinStock());
+        if (incoming.getBadge() != null)
+            existing.setBadge(incoming.getBadge());
+        if (incoming.getImageUrl() != null)
+            existing.setImageUrl(incoming.getImageUrl());
 
         existing.setActive(incoming.isActive());
 
@@ -197,8 +209,7 @@ public class ProductServiceImpl implements ProductService {
             predicates.add(cb.or(
                     cb.like(cb.lower(root.get("name")), like),
                     cb.like(cb.lower(root.get("description")), like),
-                    cb.like(cb.lower(root.get("shortDescription")), like)
-            ));
+                    cb.like(cb.lower(root.get("shortDescription")), like)));
         }
 
         if (categoryId != null) {
@@ -225,8 +236,7 @@ public class ProductServiceImpl implements ProductService {
             for (Sort.Order so : pageable.getSort()) {
                 Path<?> path = root.get(so.getProperty());
 
-                jakarta.persistence.criteria.Order critOrder =
-                        so.isAscending() ? cb.asc(path) : cb.desc(path);
+                jakarta.persistence.criteria.Order critOrder = so.isAscending() ? cb.asc(path) : cb.desc(path);
 
                 orders.add(critOrder);
             }
@@ -256,8 +266,7 @@ public class ProductServiceImpl implements ProductService {
             countPredicates.add(cb.or(
                     cb.like(cb.lower(countRoot.get("name")), like),
                     cb.like(cb.lower(countRoot.get("description")), like),
-                    cb.like(cb.lower(countRoot.get("shortDescription")), like)
-            ));
+                    cb.like(cb.lower(countRoot.get("shortDescription")), like)));
         }
 
         if (categoryId != null)
@@ -283,12 +292,12 @@ public class ProductServiceImpl implements ProductService {
     // ------------------------------------------------------------
 
     private void reconcileImages(Product existing, List<ProductImage> incoming) {
-        if (incoming == null) return;
+        if (incoming == null)
+            return;
 
-        Map<Long, ProductImage> existingById =
-                existing.getImages().stream()
-                        .filter(i -> i.getId() != null)
-                        .collect(Collectors.toMap(ProductImage::getId, i -> i));
+        Map<Long, ProductImage> existingById = existing.getImages().stream()
+                .filter(i -> i.getId() != null)
+                .collect(Collectors.toMap(ProductImage::getId, i -> i));
 
         List<ProductImage> result = new ArrayList<>();
 
@@ -317,12 +326,12 @@ public class ProductServiceImpl implements ProductService {
     }
 
     private void reconcileColors(Product existing, List<ProductColor> incoming) {
-        if (incoming == null) return;
+        if (incoming == null)
+            return;
 
-        Map<Long, ProductColor> existingById =
-                existing.getColors().stream()
-                        .filter(c -> c.getId() != null)
-                        .collect(Collectors.toMap(ProductColor::getId, c -> c));
+        Map<Long, ProductColor> existingById = existing.getColors().stream()
+                .filter(c -> c.getId() != null)
+                .collect(Collectors.toMap(ProductColor::getId, c -> c));
 
         List<ProductColor> result = new ArrayList<>();
 
@@ -353,12 +362,12 @@ public class ProductServiceImpl implements ProductService {
     }
 
     private void reconcileSpecs(Product existing, List<ProductSpecification> incoming) {
-        if (incoming == null) return;
+        if (incoming == null)
+            return;
 
-        Map<Long, ProductSpecification> existingById =
-                existing.getSpecifications().stream()
-                        .filter(s -> s.getId() != null)
-                        .collect(Collectors.toMap(ProductSpecification::getId, s -> s));
+        Map<Long, ProductSpecification> existingById = existing.getSpecifications().stream()
+                .filter(s -> s.getId() != null)
+                .collect(Collectors.toMap(ProductSpecification::getId, s -> s));
 
         List<ProductSpecification> result = new ArrayList<>();
 
@@ -382,5 +391,115 @@ public class ProductServiceImpl implements ProductService {
 
         existing.getSpecifications().clear();
         existing.getSpecifications().addAll(result);
+    }
+
+    // ------------------------------------------------------------
+    // ADVANCED SEARCH & FILTERS
+    // ------------------------------------------------------------
+
+    @Override
+    public Page<Product> advancedSearch(ProductSearchDTO searchDTO) {
+        // Build sort
+        Sort sort = buildSort(searchDTO.getSortBy());
+        Pageable pageable = PageRequest.of(
+                searchDTO.getPage(),
+                searchDTO.getSize(),
+                sort);
+
+        // Use the repository method with filters
+        return productRepository.searchProducts(
+                searchDTO.getKeyword(),
+                searchDTO.getCategoryId(),
+                searchDTO.getMinPrice(),
+                searchDTO.getMaxPrice(),
+                searchDTO.getMinRating(),
+                searchDTO.getInStock(),
+                pageable);
+    }
+
+    @Override
+    public List<String> getSearchSuggestions(String keyword) {
+        if (keyword == null || keyword.trim().isEmpty()) {
+            return Collections.emptyList();
+        }
+
+        Pageable limit = PageRequest.of(0, 10);
+        return productRepository.findProductNameSuggestions(keyword.trim(), limit);
+    }
+
+    @Override
+    public FilterOptionsDTO getFilterOptions() {
+        FilterOptionsDTO options = new FilterOptionsDTO();
+
+        // Get price range
+        BigDecimal minPrice = productRepository.findMinPrice();
+        BigDecimal maxPrice = productRepository.findMaxPrice();
+        options.setPriceRange(new FilterOptionsDTO.PriceRange(
+                minPrice != null ? minPrice : BigDecimal.ZERO,
+                maxPrice != null ? maxPrice : BigDecimal.valueOf(10000)));
+
+        // Get available colors
+        List<String> colors = productColorRepository.findAll().stream()
+                .map(ProductColor::getColorName)
+                .distinct()
+                .sorted()
+                .collect(Collectors.toList());
+        options.setAvailableColors(colors);
+
+        // Get available storage options from specifications
+        List<String> storage = productSpecificationRepository.findAll().stream()
+                .filter(spec -> "Storage".equalsIgnoreCase(spec.getSpecKey()) ||
+                        "Capacity".equalsIgnoreCase(spec.getSpecKey()))
+                .map(ProductSpecification::getSpecValue)
+                .distinct()
+                .sorted()
+                .collect(Collectors.toList());
+        options.setAvailableStorage(storage);
+
+        // Get categories with product counts
+        List<FilterOptionsDTO.CategoryOption> categories = categoryRepository.findAll().stream()
+                .map(cat -> {
+                    long count = productRepository.findByCategoryId(cat.getId()).size();
+                    return new FilterOptionsDTO.CategoryOption(
+                            cat.getId(),
+                            cat.getName(),
+                            count);
+                })
+                .filter(cat -> cat.getProductCount() > 0)
+                .collect(Collectors.toList());
+        options.setCategories(categories);
+
+        return options;
+    }
+
+    @Override
+    public Page<Product> findByPriceRange(BigDecimal minPrice, BigDecimal maxPrice, Pageable pageable) {
+        return productRepository.findByIsActiveTrueAndPriceBetween(minPrice, maxPrice, pageable);
+    }
+
+    @Override
+    public Page<Product> findByMinRating(BigDecimal minRating, Pageable pageable) {
+        return productRepository.findByIsActiveTrueAndRatingGreaterThanEqual(minRating, pageable);
+    }
+
+    @Override
+    public Page<Product> findInStockProducts(Pageable pageable) {
+        return productRepository.findByIsActiveTrueAndStockGreaterThan(0, pageable);
+    }
+
+    // Helper method to build sort
+    private Sort buildSort(String sortBy) {
+        if (sortBy == null || sortBy.isEmpty()) {
+            return Sort.by(Sort.Direction.DESC, "createdAt");
+        }
+
+        return switch (sortBy.toLowerCase()) {
+            case "price_asc" -> Sort.by(Sort.Direction.ASC, "price");
+            case "price_desc" -> Sort.by(Sort.Direction.DESC, "price");
+            case "rating" -> Sort.by(Sort.Direction.DESC, "rating");
+            case "popular" -> Sort.by(Sort.Direction.DESC, "reviewsCount");
+            case "newest" -> Sort.by(Sort.Direction.DESC, "createdAt");
+            default -> Sort.by(Sort.Direction.DESC, "createdAt");
+        };
     }
 }

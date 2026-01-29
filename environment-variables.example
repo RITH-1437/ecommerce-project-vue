@@ -2,10 +2,14 @@
 # Copy this file to .env or set these environment variables
 
 # Database Configuration
+DB_USERNAME=root
 DB_PASSWORD=
 
 # JWT Configuration
 JWT_SECRET=
+
+# Frontend URL
+FRONTEND_URL=http://localhost:3000
 
 # Google OAuth2 Configuration
 # GOOGLE_CLIENT_ID=
@@ -13,6 +17,21 @@ JWT_SECRET=
 
 # OpenAI API Key
 # OPENAI_API_KEY=
+
+# ABA PayWay Configuration
+PAYWAY_MERCHANT_ID=your_payway_merchant_id
+PAYWAY_API_KEY=your_payway_api_key
+PAYWAY_SECRET_KEY=your_payway_secret_key
+PAYWAY_CALLBACK_URL=http://localhost:8080/api/payments/callback
+PAYWAY_RETURN_URL=http://localhost:3000/payment/success
+
+# Mail Configuration
+MAIL_USERNAME=your_email@gmail.com
+MAIL_PASSWORD=your_app_password
+
+# Alert Configuration
+ALERT_EMAIL_FROM=noreply@applestore.com
+ALERT_ADMIN_EMAIL=admin@applestore.com
 
 # Instructions:
 # 1. Set these environment variables in your system OR

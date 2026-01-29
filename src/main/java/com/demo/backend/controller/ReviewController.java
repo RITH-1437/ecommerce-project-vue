@@ -51,4 +51,19 @@ public class ReviewController {
         reviewService.delete(id);
         return ResponseEntity.noContent().build();
     }
+
+    @PostMapping("/{id}/helpful")
+    public ResponseEntity<Review> markHelpful(@PathVariable Long id) {
+        return ResponseEntity.ok(reviewService.incrementHelpfulCount(id));
+    }
+
+    @PutMapping("/{id}/approve")
+    public ResponseEntity<Review> approve(@PathVariable Long id) {
+        return ResponseEntity.ok(reviewService.approve(id));
+    }
+
+    @PutMapping("/{id}/reject")
+    public ResponseEntity<Review> reject(@PathVariable Long id) {
+        return ResponseEntity.ok(reviewService.reject(id));
+    }
 }

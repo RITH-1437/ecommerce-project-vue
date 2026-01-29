@@ -5,14 +5,22 @@ Write-Host "========================================" -ForegroundColor Cyan
 Write-Host ""
 
 # Set environment variables
+$env:DB_USERNAME="root"
 $env:DB_PASSWORD="your_mysql_password_here"
 $env:SPRING_PROFILES_ACTIVE="default"
 $env:JWT_SECRET="your_jwt_secret_key_here_at_least_256_bits"
 # $env:GOOGLE_CLIENT_ID="your_google_client_id_here.apps.googleusercontent.com"
 # $env:GOOGLE_CLIENT_SECRET="your_google_client_secret_here"
+$env:FRONTEND_URL="http://localhost:3000"
 $env:PAYWAY_MERCHANT_ID="your_payway_merchant_id"
 $env:PAYWAY_API_KEY="your_payway_api_key"
 $env:PAYWAY_SECRET_KEY="your_payway_secret_key"
+$env:PAYWAY_CALLBACK_URL="http://localhost:8080/api/payments/callback"
+$env:PAYWAY_RETURN_URL="http://localhost:3000/payment/success"
+$env:MAIL_USERNAME="your_email@gmail.com"
+$env:MAIL_PASSWORD="your_app_password"
+$env:ALERT_EMAIL_FROM="noreply@applestore.com"
+$env:ALERT_ADMIN_EMAIL="admin@applestore.com"
 # $env:OPENAI_API_KEY="sk-proj-your_openai_api_key_here"
 
 Write-Host "🔧 Configuration:" -ForegroundColor Yellow

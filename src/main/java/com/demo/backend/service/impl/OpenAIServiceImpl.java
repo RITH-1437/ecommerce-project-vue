@@ -14,7 +14,7 @@ import java.util.concurrent.TimeUnit;
 @Slf4j
 public class OpenAIServiceImpl implements OpenAIService {
 
-    @Value("${openai.api.key}")
+    @Value("${openai.api.key:sk-placeholder-key-for-development}")
     private String apiKey;
 
     // Increased timeout

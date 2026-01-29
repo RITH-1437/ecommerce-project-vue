@@ -38,6 +38,14 @@ public class OrderController {
         return ResponseEntity.ok(orderService.findByUserId(userId));
     }
 
+    @GetMapping("/user/{userId}/paginated")
+    public ResponseEntity<Page<Order>> getByUserPaginated(
+            @PathVariable Long userId,
+            @RequestParam(required = false) OrderStatus status,
+            Pageable pageable) {
+        return ResponseEntity.ok(orderService.findByUserIdWithFilters(userId, status, pageable));
+    }
+
     @GetMapping("/status/{status}")
     public ResponseEntity<List<Order>> getByStatus(@PathVariable OrderStatus status) {
         return ResponseEntity.ok(orderService.findByStatus(status));
